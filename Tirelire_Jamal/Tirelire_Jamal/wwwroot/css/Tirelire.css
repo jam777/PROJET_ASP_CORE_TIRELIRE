@@ -1,0 +1,34 @@
+﻿body {
+    margin: 0;
+    background-color: #f3f3f3;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+/****************************Navbar***************************/
+
+
+/************************Titre Visiteur***********************/
+.titre_visiteur {
+    border-bottom: 1px solid grey;
+    padding-bottom: 0.3rem;
+}
+
+
+
+
+/*****************************Footer**************************/
+footer {
+    position: absolute;
+    bottom: 0px;
+    height: 7rem;
+    line-height: 7rem;
+    width: 100%;
+    background-color: black;
+}
+
+    footer .copy {
+        color: white;
+    }

@@ -1,0 +1,16 @@
+﻿using System;
+using System.Collections.Generic;
+
+namespace Tirelire_Jamal
+{
+    public partial class Avis
+    {
+        public int Id { get; set; }
+        public int Idproduit { get; set; }
+        public int Idclient { get; set; }
+        public bool? Valide { get; set; }
+
+        public virtual Client IdclientNavigation { get; set; }
+        public virtual Produit IdproduitNavigation { get; set; }
+    }
+}
