@@ -1,5 +1,29 @@
-﻿@{
-    ViewData["Title"] = "Accueil";
-    ViewBag.Titre = "Liste des articles";
+﻿@model IEnumerable<Tirelire_Jamal.Models.Produit>
+
+
+@{
+    ViewData["Title"] = "Liste des articles";
 }
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item active" aria-current="page">
+            Accueil
+        </li>
+    </ol>
+</nav>
+
+@Html.Partial("_titreVisiteur")
+
+<div class="row mx-0">
+    @foreach (var produit in Model)
+    {
+        @Html.Partial("_card", produit);
+    }
+</div>
+
+<div class="pagination row justify-content-center">
+    @Html.Partial("_pagination");
+</div>
+
 

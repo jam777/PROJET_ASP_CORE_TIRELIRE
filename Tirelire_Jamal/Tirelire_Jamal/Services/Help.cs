@@ -1,56 +1,48 @@
-﻿using Microsoft.Net.Http.Headers;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Net.Http.Headers;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Tirelire_Jamal
 {
-    public class Help
+    public static class Help
     {
-        enum color
+        public static string file_color(string file)
         {
-            Blanc = 1,
-            Rose,
-            Gris,
-            Marron,
-            Vert,
-            Argent
+            int pos = file.IndexOf("_") + 1;
+            var col = file.Substring(pos);
+            pos = col.IndexOf(".");
+            col = col.Substring(0, pos);
+            return col;
         }
 
-        public static int color_produit(int i)
+        public static int image_idcolor(HashSet<string> couleur, string image)
         {
-            int res = 0;
+            int cpt = 1;
+            string imgColor = file_color(image);
 
-            switch (i)
+            foreach (var col in couleur)
             {
-                case 1: res = (int)color.Rose; break;
-                case 2: res = (int)color.Blanc; break;
-                case 3: res = (int)color.Blanc; break;
-                case 4: res = (int)color.Marron; break;
-                case 5: res = (int)color.Blanc; break;
-                case 6: res = (int)color.Blanc; break;
-                case 7: res = (int)color.Gris; break;
-                case 8: res = (int)color.Rose; break;
-                case 9: res = (int)color.Blanc; break;
-                case 10: res = (int)color.Marron; break;
-                case 11: res = (int)color.Vert; break;
-                case 12: res = (int)color.Blanc; break;
-                case 13: res = (int)color.Argent; break;
-                case 14: res = (int)color.Argent; break;
-                case 15: res = (int)color.Gris; break;
-                case 16: res = (int)color.Blanc; break;
-                case 17: res = (int)color.Blanc; break;
-                case 18: res = (int)color.Vert; break;
-                case 19: res = (int)color.Blanc; break;
-                case 20: res = (int)color.Blanc; break;
-
-                default:
+                if (imgColor == col)
+                {
                     break;
+                }
+                else { cpt++; }
+
             }
 
-            return res;
+            return cpt;
+        }
 
+        public static void removeTable<TEntity>(this Microsoft.EntityFrameworkCore.DbSet<TEntity> test) where TEntity : class
+        {
+            foreach (var item in test)
+            {
+                test.Remove(item);
+            }
 
         }
     }

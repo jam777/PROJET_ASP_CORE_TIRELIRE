@@ -5,15 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"]</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+
+
     <link rel="stylesheet" href="~/css/Tirelire.css" />
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-light border-bottom box-shadow mb-3 ">
+        <nav class="navbar navbar-expand-sm  navbar-toggleable-sm navbar-light bg-light border-bottom box-shadow mb-3 ">
 
 
             <a class="navbar-brand" href="#">
-                <img src="/images/Tirelire.png" width="30" height="30" alt="" loading="lazy">
+                <img src="/logo/Tirelire.png" width="30" height="30" alt="" loading="lazy">
             </a>
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -38,22 +42,6 @@
     </header>
 
     <div class="container">
-
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item active" aria-current="page">Accueil</li>
-            </ol>
-        </nav>
-
-        <div class="titre_visiteur d-flex justify-content-between mx-2">
-            <div class="titre">
-                @ViewBag.Titre
-            </div>
-            <div class="visiteur">
-                Visiteur(s) (15)
-            </div>
-        </div>
-
 
         <main role="main" class="pb-3">
             @RenderBody()

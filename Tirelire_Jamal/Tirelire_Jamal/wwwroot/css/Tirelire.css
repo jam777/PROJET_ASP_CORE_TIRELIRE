@@ -1,23 +1,66 @@
 ﻿body {
     margin: 0;
     background-color: #f3f3f3;
+    margin-top: 5.5rem;
+    padding-bottom: 7rem;
+    z-index: -1 !important;
 }
 
 html {
     font-size: 62.5%;
+    position: relative;
+    z-index: -1 !important;
 }
 
 /****************************Navbar***************************/
+.navbar {
+    position: fixed !important;
+    width: 100%;
+    top: 0;
+    z-index: 1000 !important;
+}
 
+    .navbar .nav-link:hover {
+        font-weight: bold !important;
+        transition: font-weight 0.5s;
+    }
+
+.container, main, row {
+    z-index: 1 !important;
+}
+
+/************************Fil d'Ariane***********************/
+.breadcrumb-item {
+    font-weight: bold;
+    font-style: italic;
+}
 
 /************************Titre Visiteur***********************/
 .titre_visiteur {
     border-bottom: 1px solid grey;
     padding-bottom: 0.3rem;
+    font-size: 1.3rem;
 }
 
+/***************************Card Acceuil***********************/
+.produit .card-body {
+    border-top: 1px solid #cecece;
+}
 
+.produit .card img {
+    transition: opacity 0.5s;
+}
 
+    .produit .card img:hover {
+        opacity: 0.5;
+        cursor: pointer;
+    }
+
+/*****************************Detail**************************/
+.descriptionDetail a {
+    text-decoration: none;
+    color: inherit;
+}
 
 /*****************************Footer**************************/
 footer {
@@ -32,3 +75,36 @@ footer {
     footer .copy {
         color: white;
     }
+
+/***********************Responsive**************************/
+
+/*Card_Accueil*/
+@media only screen and (max-width:580px) {
+    .article {
+        max-width: 33%;
+    }
+
+    .container {
+        max-width: 400px;
+    }
+}
+
+@media only screen and (max-width:425px) {
+    .article {
+        max-width: 50%;
+    }
+
+    .container {
+        max-width: 300px;
+    }
+}
+
+@media only screen and (max-width:320px) {
+    .article {
+        max-width: 100%;
+    }
+
+    .container {
+        max-width: 200px;
+    }
+}
