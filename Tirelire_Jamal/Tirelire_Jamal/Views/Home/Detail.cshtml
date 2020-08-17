@@ -24,7 +24,13 @@
     <div class="card mb-3 col-10">
         <div class="row no-gutters">
             <div class=" imgDetail py-4 col-lg-5 col-md-5 col-sm-5">
-                <img src=@Model.produit.Image class="card-img" alt="imgProduit">
+
+                <a data-toggle="modal" data-target="#exampleModalCenter">
+                    <img src=@Model.produit.Image class="card-img" alt="imgProduit">
+                </a>
+
+                @Html.Partial("_modalDetail", Model.produit)
+
             </div>
             <div class="justify-content-center mt-lg-5 col-lg-7 col-md-7 col-sm-7">
                 <div class="card-body mt-lg-5">
@@ -49,8 +55,6 @@
         </div>
     </div>
 </div>
-
-
 
 @*Description*@
 <div class="descriptionDetail">

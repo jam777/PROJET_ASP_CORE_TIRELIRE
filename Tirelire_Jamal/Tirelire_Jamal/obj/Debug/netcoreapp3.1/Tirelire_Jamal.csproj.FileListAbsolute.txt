@@ -179,3 +179,4 @@ C:\Users\jamel\Desktop\Tirelire_Jam_ASP\Tirelire_Jamal\Tirelire_Jamal\obj\Debug\
 C:\Users\jamel\Desktop\Tirelire_Jam_ASP\Tirelire_Jamal\Tirelire_Jamal\obj\Debug\netcoreapp3.1\Tirelire_Jamal.csproj.CoreCompileInputs.cache
 C:\Users\jamel\Desktop\Tirelire_Jam_ASP\Tirelire_Jamal\Tirelire_Jamal\obj\Debug\netcoreapp3.1\Tirelire_Jamal.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\jamel\Desktop\Tirelire_Jam_ASP\Tirelire_Jamal\Tirelire_Jamal\obj\Debug\netcoreapp3.1\Tirelire_Jamal.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\jamel\Desktop\Tirelire_Jam_ASP\Tirelire_Jamal\Tirelire_Jamal\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_modalDetail.cshtml.g.cs
