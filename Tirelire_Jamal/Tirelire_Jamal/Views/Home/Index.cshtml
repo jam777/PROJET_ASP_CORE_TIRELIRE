@@ -15,10 +15,13 @@
 
 @Html.Partial("_titreVisiteur")
 
+
+
 <div class="row mx-0">
     @foreach (var produit in Model)
     {
         @Html.Partial("_card", produit);
+
     }
 </div>
 

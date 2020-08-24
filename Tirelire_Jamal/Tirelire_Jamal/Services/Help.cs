@@ -10,6 +10,11 @@ namespace Tirelire_Jamal
 {
     public static class Help
     {
+        /// <summary>
+        /// Recupere un fichier x_rouge_jpg => rouge
+        /// </summary>
+        /// <param name="file">Nom du fichier image</param>
+        /// <returns>Retoune une couleur</returns>
         public static string file_color(string file)
         {
             int pos = file.IndexOf("_") + 1;
@@ -17,33 +22,22 @@ namespace Tirelire_Jamal
             pos = col.IndexOf(".");
             col = col.Substring(0, pos);
             return col;
+
+
         }
 
-        public static int image_idcolor(HashSet<string> couleur, string image)
+        /// <summary>
+        /// Permet de purger les tables pour la fixtures
+        /// </summary>
+        /// <typeparam name="T">Model de classe</typeparam>
+        /// <param name="table">Collection d'objets entités</param>
+        public static void removeTable<T>(this Microsoft.EntityFrameworkCore.DbSet<T> table) where T : class
         {
-            int cpt = 1;
-            string imgColor = file_color(image);
-
-            foreach (var col in couleur)
+            foreach (var item in table)
             {
-                if (imgColor == col)
-                {
-                    break;
-                }
-                else { cpt++; }
-
+                table.Remove(item);
             }
-
-            return cpt;
         }
 
-        public static void removeTable<TEntity>(this Microsoft.EntityFrameworkCore.DbSet<TEntity> test) where TEntity : class
-        {
-            foreach (var item in test)
-            {
-                test.Remove(item);
-            }
-
-        }
     }
 }

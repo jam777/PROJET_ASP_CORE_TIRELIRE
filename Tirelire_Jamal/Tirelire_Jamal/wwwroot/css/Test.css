@@ -1,0 +1,60 @@
+﻿body {
+}
+
+p {
+    height: 150px;
+    line-height: 150px;
+    text-align: center;
+}
+
+.d1 {
+    height: 100px;
+    width: 150px;
+    position: relative;
+}
+
+.d2 {
+    height: 50px;
+    width: 50px;
+    position: absolute;
+    top: 25%;
+    /* //transform: translateY(-50%);*/
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.d3 {
+    height: 100px;
+    width: 150px;
+    text-align: center;
+}
+
+.d4 {
+    height: 50px;
+    width: 50px;
+    display: inline;
+    line-height: 100px;
+}
+
+.d5 {
+    height: 5rem;
+}
+
+.d6 {
+    height: 3rem;
+}
+
+    .d6 span {
+        line-height: 2.5rem;
+    }
+
+
+
+
+.b {
+    border: 1px solid black;
+}
+
+.r {
+    border: 1px solid red;
+}

@@ -38,9 +38,7 @@ namespace Tirelire_Jamal.Data
         {
             modelBuilder.Entity<Adresse>(entity =>
             {
-                entity.Property(e => e.Id)
-                    .HasColumnName("ID")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.AdFacturation)
                     .IsRequired()
@@ -55,9 +53,7 @@ namespace Tirelire_Jamal.Data
 
             modelBuilder.Entity<Avis>(entity =>
             {
-                entity.Property(e => e.Id)
-                    .HasColumnName("ID")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.Idclient).HasColumnName("IDClient");
 
@@ -78,9 +74,7 @@ namespace Tirelire_Jamal.Data
 
             modelBuilder.Entity<Client>(entity =>
             {
-                entity.Property(e => e.Id)
-                    .HasColumnName("ID")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.DateNaissance)
                     .HasColumnName("Date_Naissance")
@@ -116,15 +110,16 @@ namespace Tirelire_Jamal.Data
 
             modelBuilder.Entity<Commande>(entity =>
             {
-                entity.Property(e => e.Id)
-                    .HasColumnName("ID")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.Commentaire)
                     .IsRequired()
                     .HasColumnType("text");
 
-                entity.Property(e => e.Date).HasColumnType("datetime");
+                entity.Property(e => e.Date)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Idclient).HasColumnName("IDClient");
 
@@ -136,15 +131,12 @@ namespace Tirelire_Jamal.Data
                 entity.HasOne(d => d.IdclientNavigation)
                     .WithMany(p => p.Commande)
                     .HasForeignKey(d => d.Idclient)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Commande_Client");
             });
 
             modelBuilder.Entity<Couleur>(entity =>
             {
-                entity.Property(e => e.Id)
-                    .HasColumnName("ID")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.Nom)
                     .IsRequired()
@@ -154,9 +146,7 @@ namespace Tirelire_Jamal.Data
 
             modelBuilder.Entity<DetailCommande>(entity =>
             {
-                entity.Property(e => e.Id)
-                    .HasColumnName("ID")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.Idcommande).HasColumnName("IDCommande");
 
@@ -165,7 +155,6 @@ namespace Tirelire_Jamal.Data
                 entity.HasOne(d => d.IdcommandeNavigation)
                     .WithMany(p => p.DetailCommande)
                     .HasForeignKey(d => d.Idcommande)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_DetailCommande_Commande");
 
                 entity.HasOne(d => d.IdproduitNavigation)
@@ -177,9 +166,7 @@ namespace Tirelire_Jamal.Data
 
             modelBuilder.Entity<Fabricant>(entity =>
             {
-                entity.Property(e => e.Id)
-                    .HasColumnName("ID")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.Nom)
                     .IsRequired()
@@ -189,9 +176,7 @@ namespace Tirelire_Jamal.Data
 
             modelBuilder.Entity<Produit>(entity =>
             {
-                entity.Property(e => e.Id)
-                    .HasColumnName("ID")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.Description)
                     .IsRequired()

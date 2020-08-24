@@ -1,10 +1,10 @@
 ﻿@model Tirelire_Jamal.Services.DetailColor;
 @{
     ViewData["Title"] = "Detail";
+
 }
 
-<script src="jquery-3.5.1.min.js"></script>
-<script src="/js/Tirelire.js"></script>
+<span id="statusPanier">@ViewBag.statusAjoutPanier</span>
 
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
@@ -17,73 +17,118 @@
     </ol>
 </nav>
 
-@Html.Partial("_titreVisiteur")
 
-@*Detail*@
-<div class="detail d-flex justify-content-center">
-    <div class="card mb-3 col-10">
-        <div class="row no-gutters">
-            <div class=" imgDetail py-4 col-lg-5 col-md-5 col-sm-5">
 
+@*DETAIL*@
+<div class="detail row justify-content-center mx-0">
+    @*CARD*@
+    <div class="card mb-3 col-lg-8">
+        <div class="titre_visiteur mx-2 d-flex justify-content-between mb-3">
+            <div class="titre">
+                Détail de l'article
+            </div>
+        </div>
+        <div class="row justify-content-center no-gutters">
+            @*IMAGE et MODAL*@
+            <div class=" imgDetail py-4  col-sm-5">
+                @*IMAGE*@
                 <a data-toggle="modal" data-target="#exampleModalCenter">
                     <img src=@Model.produit.Image class="card-img" alt="imgProduit">
                 </a>
-
+                @*MODAL IMAGE*@
                 @Html.Partial("_modalDetail", Model.produit)
 
             </div>
-            <div class="justify-content-center mt-lg-5 col-lg-7 col-md-7 col-sm-7">
-                <div class="card-body mt-lg-5">
+            <div class="info-panier    col-sm-7">
+
+                @*AJOUT PANIER*@
+                <div class="card-body ">
+
+                    @*TITRE*@
                     <h2 class="card-title">@Model.produit.Nom</h2>
 
-                    <h4 class="card-title">LxHxL(cm): @Model.produit.Longueur<span>x</span>@Model.produit.Hauteur<span>x</span>@Model.produit.Largeur</h4>
+                    @*INFO*@
+                    <table class="table table-responsive-sm">
+                        <thead>
+                            <tr>
+                                <th scope="col">LxHxL(cm):</th>
+                                <th scope="col">Poids:</th>
+                                <th scope="col">Frais:</th>
+                                <th scope="col">Prix:</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="long"> @Model.produit.Longueur X @Model.produit.Hauteur X @Model.produit.Largeur</</td>
+                                <td class="poids">@Model.produit.Poids kg</td>
+                                <td class="frais">@Model.produit.Frais€/kg</td>
+                                <td class="prix">@Model.produit.Prix€</td>
+                            </tr>
+                        </tbody>
+                    </table>
 
-                    <h4 class="card-title">Poids: @Model.produit.Poids kg</h4>
-
-                    <h4 class="card-title">Prix: @Model.produit.Prix€</h4>
-
-                    <h4 class="card-title">Quantité</h4>
-
-                    <div class="form" action="" method="post">
-                        <div class="form-group">
-                            <input class="btn btn-outline-success btn-lg form-control" type="number" value="1" min="1">
-                            <button type="submit" class="btn btn-success btn-lg mt-2 form-control">Ajouter au Panier</button>
+                    @*Description*@
+                    <div class="descriptionDetail">
+                        <div class="titre_visiteur mx-2 d-flex justify-content-between mb-3">
+                            <div class="titre">
+                                <a class="" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                    <span>Description</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="collapse  mb-5" id="collapseExample">
+                            <div class="card card-body">
+                                @Model.produit.Description
+                            </div>
                         </div>
                     </div>
+
+                    @{
+                        int valeur;
+                        valeur = (ViewBag.quantitePanier != 0) ? ViewBag.quantitePanier : 1;
+                    }
+
+                    @*FORMULAIRE AJOUT PANIER*@
+                    <form id="formAjouter" action=@Url.Action("Ajouter", "Panier", new { id = Model.produit.Id }) method="post">
+                        <div class="form-group">
+                            <select class="custom-select w-100 text-center" name="quantite">
+                                <option selected value="@valeur">@valeur</option>
+                                @for (int i = 1; i <= 10; i++)
+                                {
+                                    if (i == valeur)
+                                    {
+                                        continue;
+                                    }
+                                    <option value="@i" class="text-center">@i</option>
+                                }
+                            </select>
+                            <button type="submit" id="ajouterPanier" class="btn btn-success btn-lg mt-2 form-control" name="panier">Ajouter au Panier</button>
+                        </div>
+                    </form>
+                    @*MODAL PANIER*@
+                    @Html.Partial("_modalPanier", Model.produit)
                 </div>
             </div>
         </div>
     </div>
-</div>
-
-@*Description*@
-<div class="descriptionDetail">
-    <div class="titre_visiteur mx-2 d-flex justify-content-between mb-3">
-        <div class="titre">
-            <a class="" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                Description
-            </a>
-
+    @* MODAL IMAGE*@
+    <div class="container carousseDetail  col-lg-4">
+        <div class="titre_visiteur mx-2 d-flex justify-content-between mb-3">
+            <div class="titre">
+                Article(s) de même couleur
+            </div>
         </div>
-    </div>
-    <div class="collapse  mb-5" id="collapseExample">
-        <div class="card card-body">
-            @Model.produit.Description
-        </div>
+        @Html.Partial("_carrousel", Model.colorProduit)
     </div>
 </div>
 
 
-@*Tirelire couleur identique*@
-<div class="titre_visiteur mx-2 d-flex justify-content-between mb-3">
-    <div class="titre">
-        Tirelire(s) de même couleur
-    </div>
-</div>
+@section scripts
+{
+    <script src="~/js/Detail.js"></script>
 
-<div class="container carousseDetail  col-2 col-sm-4">
-    @Html.Partial("_carrousel", Model.colorProduit)
-</div>
+}
+
 
 
 

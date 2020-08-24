@@ -1,11 +1,17 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 using Tirelire_Jamal.Data;
+using Tirelire_Jamal.Models;
+using Tirelire_Jamal.Repository;
+using Tirelire_Jamal.Services;
+using Microsoft.AspNetCore.Builder;
 
 namespace Tirelire_Jamal
 {
@@ -22,28 +28,37 @@ namespace Tirelire_Jamal
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<Tirelire_JamContext>(
-                  b => b
-                   .UseLazyLoadingProxies()
-                  .UseSqlServer(
-                     Configuration.GetConnectionString("DefaultConnection")
-
-               )
-
-               );
-
+              b => b.UseLazyLoadingProxies()
+                    .UseSqlServer(
+                     Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
-
-
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
+
+            services.AddDistributedMemoryCache();
+
+            services.AddSession(options =>
+            {
+                options.Cookie.Name = "Panier";
+                options.IdleTimeout = TimeSpan.FromSeconds(2000);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
 
             services.AddControllersWithViews();
 
             services.AddRazorPages();
+
+            services.AddControllersWithViews()
+                .AddNewtonsoftJson(options =>
+                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                   );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,6 +68,7 @@ namespace Tirelire_Jamal
             {
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
+                app.UseBrowserLink();
             }
             else
             {
@@ -61,12 +77,17 @@ namespace Tirelire_Jamal
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
+
             app.UseStaticFiles();
 
             app.UseRouting();
 
             app.UseAuthentication();
+
             app.UseAuthorization();
+
+            //Toujours avant endpoints
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {

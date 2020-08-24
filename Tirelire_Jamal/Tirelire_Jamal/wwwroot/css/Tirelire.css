@@ -1,15 +1,30 @@
 ﻿body {
     margin: 0;
     background-color: #f3f3f3;
-    margin-top: 5.5rem;
-    padding-bottom: 7rem;
-    z-index: -1 !important;
+    margin-top: 7rem;
+    padding-bottom: 8rem;
+    position: relative;
 }
 
 html {
     font-size: 62.5%;
-    position: relative;
-    z-index: -1 !important;
+}
+
+@font-face {
+    font-family: "fontTitre";
+    src: url(/font/philosopher/Philosopher-Regular.ttf)
+}
+
+.b {
+    border: 1px solid black;
+}
+
+.r {
+    border: 1px solid red;
+}
+
+.v {
+    border: 1px solid green;
 }
 
 /****************************Navbar***************************/
@@ -20,9 +35,66 @@ html {
     z-index: 1000 !important;
 }
 
-    .navbar .nav-link:hover {
-        font-weight: bold !important;
-        transition: font-weight 0.5s;
+
+.nav-item a, .nav-item span {
+    font-family: fontTitre !important;
+    font-size: 1.5rem;
+    font-weight: bold;
+    position: relative;
+}
+
+    .nav-item a:after {
+        content: "";
+        border-top: 6px solid red;
+        width: 100%;
+        position: absolute;
+        bottom: -45%;
+        left: 0;
+        transform: scaleX(0);
+        transition: transform 0.25s ease-in-out 0s;
+    }
+
+.fa-shopping-cart {
+    font-size: 2rem !important;
+}
+
+.nbProduit {
+    border-radius: 50px;
+    height: 23px;
+    width: 20px;
+    position: absolute !important;
+    background-color: orangered;
+    display: inline-block !important;
+    top: 0;
+    text-align: center;
+    color: white;
+}
+
+@media (max-width: 576px) {
+    .nav-item a:after {
+        content: "";
+        border-top: 4px solid red;
+        /*width: 100%;*/
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        transform: scaleX(0);
+        transition: transform 0.25s ease-in-out 0s;
+    }
+}
+
+.nav-item a {
+    text-align: center !important;
+    /* display: inline !important;*/
+}
+
+.nav-item {
+    text-align: center !important;
+    margin-bottom: 3px;
+}
+
+    .nav-item a:hover:after {
+        transform: scale(1);
     }
 
 .container, main, row {
@@ -35,13 +107,29 @@ html {
     font-style: italic;
 }
 
-/************************Titre Visiteur***********************/
-.titre_visiteur {
-    border-bottom: 1px solid grey;
-    padding-bottom: 0.3rem;
-    font-size: 1.3rem;
+.arial {
+    position: fixed !important;
+    width: 100%;
+    top: 60px;
+    z-index: 1000 !important;
 }
 
+/************************Titre Visiteur***********************/
+.titre_visiteur {
+    box-shadow: 0 4px 6px -6px #222;
+    padding-bottom: 0.3rem;
+    font-family: fontTitre !important;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.breadcrumb-item {
+    font-family: fontTitre !important;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
 /***************************Card Acceuil***********************/
 .produit .card-body {
     border-top: 1px solid #cecece;
@@ -56,11 +144,158 @@ html {
         cursor: pointer;
     }
 
-/*****************************Detail**************************/
+.hoverImg:hover {
+    box-shadow: 0px 0px 5px #acacac;
+    transition: all 0.2s;
+}
+
+.hoverImg a {
+    position: relative;
+}
+
+.hoverImgBack {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: black;
+    opacity: 0;
+    transition: all 0.3s;
+    z-index: 50;
+}
+
+    .hoverImgBack:hover {
+        opacity: 0.2;
+    }
+
+.hoverDetail {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translateX(-50%) !important;
+    height: 3rem;
+    width: 7rem;
+    background-color: black;
+    opacity: 0 !important;
+    transition: opacity 0.3s;
+    z-index: 1;
+    color: white;
+    line-height: 3rem;
+    padding-left: 3px;
+    padding-right: 3px;
+    text-align: center;
+}
+
+.hoverImgBack:hover + .hoverDetail {
+    opacity: 1 !important;
+}
+
+
+/*****************************Detail Article**************************/
 .descriptionDetail a {
     text-decoration: none;
     color: inherit;
 }
+
+.descriptionDetail .card-body {
+    border-width: 0px !important;
+    font-size: 1.3rem;
+}
+
+select.custom-select {
+    font-size: 1.5rem !important;
+    color: red !important;
+    font-weight: bold;
+    text-align-last: center !important;
+}
+
+select option {
+    text-align: center !important;
+    font-weight: bold;
+    text-align-last: center !important;
+    padding-right: 50px !important;
+}
+
+table {
+    font-size: 1.3rem;
+}
+
+td.prix {
+    font-size: 2rem;
+    color: red;
+    font-weight: bold;
+}
+
+td.poids, td.long, td.frais {
+    font-size: 1.5rem;
+    color: grey;
+    font-weight: bold;
+}
+
+@media (min-width: 768px) {
+    .info-panier .card-body {
+        margin-top: 4%;
+    }
+}
+
+#statusPanier {
+    display: none;
+}
+/************************Detail Panier************************/
+.panierVide {
+    height: 40vh;
+    line-height: 40vh;
+}
+
+.deletePanier {
+    height: 30px;
+}
+
+.fas {
+    font-size: 30px;
+}
+
+.infoPanier {
+    padding-top: 10px;
+}
+
+.titrePanier {
+    font-family: fontTitre;
+    font-weight: bold;
+    text-align: center;
+    margin: auto;
+}
+
+.infoPanier table {
+    height: 100% !important;
+}
+
+    .infoPanier table td {
+        text-align: end !important;
+    }
+
+.infoPanier td input {
+    text-align: center !important;
+}
+
+.totalPanier {
+    font-weight: bold;
+    color: red;
+    font-size: 1.5rem;
+}
+
+
+@media (max-width: 320px) {
+    .infoPanier .table {
+        max-width: 75%;
+        margin: auto;
+    }
+
+    .infoPanier {
+        width: 100vw;
+    }
+}
+
 
 /*****************************Footer**************************/
 footer {
@@ -74,7 +309,23 @@ footer {
 
     footer .copy {
         color: white;
+        font-size: 1.5rem;
     }
+
+/***************************Carrousel************************/
+
+.carousel-caption h5 {
+    color: black;
+    background-color: white;
+    height: 15px !important;
+    opacity: 0.5;
+    line-height: 15px;
+    vertical-align: middle;
+    margin-bottom: 0px;
+    font-weight: bold;
+}
+
+
 
 /***********************Responsive**************************/
 

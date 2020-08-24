@@ -1,0 +1,17 @@
+C:\Users\jamel\Desktop\Tirelire_Jam_ASP\Tirelire_Jamal\Testtirelire\bin\Debug\netcoreapp3.1\Testtirelire.exe
+C:\Users\jamel\Desktop\Tirelire_Jam_ASP\Tirelire_Jamal\Testtirelire\bin\Debug\netcoreapp3.1\Testtirelire.deps.json
+C:\Users\jamel\Desktop\Tirelire_Jam_ASP\Tirelire_Jamal\Testtirelire\bin\Debug\netcoreapp3.1\Testtirelire.runtimeconfig.json
+C:\Users\jamel\Desktop\Tirelire_Jam_ASP\Tirelire_Jamal\Testtirelire\bin\Debug\netcoreapp3.1\Testtirelire.runtimeconfig.dev.json
+C:\Users\jamel\Desktop\Tirelire_Jam_ASP\Tirelire_Jamal\Testtirelire\bin\Debug\netcoreapp3.1\Testtirelire.dll
+C:\Users\jamel\Desktop\Tirelire_Jam_ASP\Tirelire_Jamal\Testtirelire\bin\Debug\netcoreapp3.1\Testtirelire.pdb
+C:\Users\jamel\Desktop\Tirelire_Jam_ASP\Tirelire_Jamal\Testtirelire\obj\Debug\netcoreapp3.1\Testtirelire.csprojAssemblyReference.cache
+C:\Users\jamel\Desktop\Tirelire_Jam_ASP\Tirelire_Jamal\Testtirelire\obj\Debug\netcoreapp3.1\Testtirelire.AssemblyInfoInputs.cache
+C:\Users\jamel\Desktop\Tirelire_Jam_ASP\Tirelire_Jamal\Testtirelire\obj\Debug\netcoreapp3.1\Testtirelire.AssemblyInfo.cs
+C:\Users\jamel\Desktop\Tirelire_Jam_ASP\Tirelire_Jamal\Testtirelire\obj\Debug\netcoreapp3.1\Testtirelire.dll
+C:\Users\jamel\Desktop\Tirelire_Jam_ASP\Tirelire_Jamal\Testtirelire\obj\Debug\netcoreapp3.1\Testtirelire.pdb
+C:\Users\jamel\Desktop\Tirelire_Jam_ASP\Tirelire_Jamal\Testtirelire\obj\Debug\netcoreapp3.1\Testtirelire.genruntimeconfig.cache
+C:\Users\jamel\Desktop\Tirelire_Jam_ASP\Tirelire_Jamal\Testtirelire\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\jamel\Desktop\Tirelire_Jam_ASP\Tirelire_Jamal\Testtirelire\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\jamel\Desktop\Tirelire_Jam_ASP\Tirelire_Jamal\Testtirelire\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Users\jamel\Desktop\Tirelire_Jam_ASP\Tirelire_Jamal\Testtirelire\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
+C:\Users\jamel\Desktop\Tirelire_Jam_ASP\Tirelire_Jamal\Testtirelire\obj\Debug\netcoreapp3.1\Testtirelire.csproj.CopyComplete

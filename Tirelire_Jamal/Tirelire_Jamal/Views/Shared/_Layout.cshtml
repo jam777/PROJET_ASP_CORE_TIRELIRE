@@ -1,23 +1,26 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
+
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"]</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-
-
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-1.9.0.js"></script>
     <link rel="stylesheet" href="~/css/Tirelire.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
 </head>
+
+
 <body>
     <header>
         <nav class="navbar navbar-expand-sm  navbar-toggleable-sm navbar-light bg-light border-bottom box-shadow mb-3 ">
 
 
             <a class="navbar-brand" href="#">
-                <img src="/logo/Tirelire.png" width="30" height="30" alt="" loading="lazy">
+                <img src="/logo/Tirelire.png" width="40" height="40" alt="logo" loading="lazy">
             </a>
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -28,12 +31,29 @@
             <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
 
                 <ul class="navbar-nav flex-grow-1 justify-content-around">
+
+                    @*ACCUEIL*@
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Accueil</a>
                     </li>
+
+                    @*LOGIN*@
                     <partial name="_LoginPartial" />
+
+                    @*PANIER*@
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="">Panier(0)</a>
+                        <a href="@Url.Action("DetailPanier","Panier")" class="nav-link text-dark">
+                            <i class="fas fa-shopping-cart"></i>
+                            @if (@ViewBag.totalPanier != 0)
+                            {
+                                <div class="nbProduit">@ViewBag.totalPanier</div>
+                            }
+                        </a>
+                    </li>
+
+                    @*VISITEURS*@
+                    <li class="nav-item">
+                        <span class="nav-link text-dark">Visiteur(s)(15)</span>
                     </li>
                 </ul>
             </div>
@@ -49,20 +69,20 @@
     </div>
 
     <footer class="border-top footer">
-        <div class="container">
-            <div class="row">
-                <div class="logo col-2">
-                    <img src="/images/Tirelire.png" alt="logo" />
-                </div>
-                <div class="text-center copy col-8">
-                    &copy; 2020 - Tirelire_Jamal
-                </div>
+
+        <div class="row ">
+            <div class="logo col-sm-2 col-3 text-right pl-0">
+                <img src="/logo/Tirelire.png" alt="logo" />
             </div>
+            <div class="text-center copy col-8">
+                &copy; 2020 - Tirelire_Jamal
+            </div>
+
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/Tirelire.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

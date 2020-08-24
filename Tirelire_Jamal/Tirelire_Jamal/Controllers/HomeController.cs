@@ -10,32 +10,49 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Tirelire_Jamal.Data;
 using Tirelire_Jamal.Services;
+using Tirelire_Jamal.Repository;
+using Tirelire_Jamal.Models;
+using Microsoft.AspNetCore.Http;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Text.Json;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Tirelire_Jamal.Controllers
 {
     public class HomeController : Controller
     {
-        private Tirelire_JamContext _ctx;
+        private IRepository<Produit> _repo;
 
-        public HomeController(Tirelire_JamContext context)
+        public HomeController(IRepository<Produit> repo)
         {
-            _ctx = context;
+            _repo = repo;
         }
 
+        /// <summary>
+        /// Liste les articles
+        /// </summary>
+        /// <returns>Vue avec collection de produits</returns>
         public IActionResult Index()
         {
-
-            var prods = _ctx.Produit.ToList();
+            //Récupère tous les produits
+            var prods = _repo.FindAll();
 
             ViewBag.Titre = "Liste des articles";
+            ViewBag.totalPanier = totalPanier();
 
             return View(prods);
         }
 
+        /// <summary>
+        /// Detail d'un produit
+        /// </summary>
+        /// <param name="id">Id du produit</param>
+        /// <returns>Vue avec DetailColor</returns>
         public IActionResult Detail(int id)
         {
             //Detail d'un article
-            var prod = _ctx.Produit.Where(p => p.Id == id).FirstOrDefault();
+            var prod = _repo.FindOne(id);
 
             //Les articles de même couleur
 
@@ -52,10 +69,91 @@ namespace Tirelire_Jamal.Controllers
             };
 
             ViewBag.Titre = "Detail d'un article";
+            ViewBag.totalPanier = totalPanier();
+            ViewBag.quantitePanier = quantitePanier(id);
+
+            double[] infoPanierModal = {
+                prod.Prix,
+                quantitePanier(id),
+                ((prod.Frais*prod.Poids+prod.Prix)*quantitePanier(id))
+            };
+
+            if (TempData["statusAjoutPanier"] != null)
+            {
+                ViewBag.statusAjoutPanier = TempData["statusAjoutPanier"];
+            }
+            else
+            {
+                ViewBag.statusAjoutPanier = 0;
+            }
+
+            ViewBag.infoPanierModal = infoPanierModal;
 
             return View(modelVue);
 
         }
+
+        /// <summary>
+        /// Permet de déserialiser une session
+        /// </summary>
+        /// <returns>PanierSeesion ou null</returns>
+        private PanierSession deserialise()
+        {
+            if (HttpContext.Session.GetString("Panier") != null)
+            {
+                return JsonSerializer.Deserialize<PanierSession>(HttpContext.Session.GetString("Panier"));
+            }
+            else
+            {
+                return null;
+            }
+
+        }
+
+        /// <summary>
+        /// Afficher le nombre total de produits dans le panier
+        /// </summary>
+        /// <returns>int ou 0</returns>
+        private int totalPanier()
+        {
+            if (deserialise() != null)
+            {
+                return deserialise().QuantiteAjoute;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
+        /// <summary>
+        /// Quantite pour un produit dans le panier
+        /// </summary>
+        /// <returns>int ou 0</returns>
+        private int quantitePanier(int id)
+        {
+            if (deserialise() != null)
+            {
+                PanierSession panierSession = deserialise();
+                var detail = panierSession.Cmd.DetailCommande.Where(p => p.Idproduit == id).FirstOrDefault();
+
+                if (detail != null)
+                {
+                    return detail.Quantite;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            else
+            {
+                return 0;
+            }
+
+        }
+
+
 
     }
 

@@ -1,0 +1,131 @@
+﻿@model Tirelire_Jamal.Services.PanierSession
+
+@{
+    ViewData["Title"] = "DetailPanier";
+}
+
+<style>
+    .panierVide {
+        height: 37rem;
+        line-height: 37rem;
+    }
+</style>
+
+<div class="arial container">
+
+    <ol class="breadcrumb row justify-content-around">
+        <div class="row col-sm-6 justify-content-center justify-content-sm-start">
+            <li class="breadcrumb-item active " aria-current="page">
+                <a href=@Url.Action("Index", "Home")>
+                    Accueil
+                </a>
+            </li>
+            <li class="breadcrumb-item " aria-current="page">
+                Panier
+            </li>
+        </div>
+        <div class="totalPanier col-sm-6 text-sm-right text-center">
+            TOTAL : 132€
+        </div>
+    </ol>
+    </nav>
+</div>
+
+
+@if (Model != null)
+{
+
+    <div class="row ListeCommande m-0">
+        @{ double ssTotal = 0, Total = 0;}
+
+        @foreach (var detail in Model.Cmd.DetailCommande)
+        {
+
+            Produit prod = new Produit();
+
+
+            foreach (var item in (ViewBag.prods as List<Produit>))
+            {
+                if (detail.Idproduit == item.Id)
+                {
+                    prod = item;
+                    break;
+                }
+            }
+            ssTotal = detail.Prix * detail.Quantite + prod.Poids * prod.Frais;
+
+            if (Model.Cmd.DetailCommande.Count == 1)
+            {
+                <style>
+                    footer {
+                        bottom: -120px !important;
+                    }
+                </style>
+            }
+
+            <div class="row detailCommande  justify-content-around  col-12 mx-0 mb-5 mt-3">
+
+                @*DELETE*@
+                <div class="deletePanier align-self-center  mb-3 mb-sm-0">
+                    <a href=@Url.Action("Supprimer", "Panier", new { id = detail.Idproduit })>
+                        <i class="fas fa-trash-alt"></i>
+                    </a>
+                </div>
+                @*TITRE IMAGE*@
+                <div class="titre-imgPanier  mb-3 mb-sm-0 ">
+                    <h3 class="titrePanier  mb-2">
+                        @prod.Nom
+                    </h3>
+                    <div class="imgPanier hoverImg mb-3 mb-sm-0">
+                        <a href=@Url.Action("Detail", "Home", new { id = detail.Idproduit }) class="d-block">
+                            <img src="@prod.Image" alt="imgProd" class="d-block" />
+                            <div class="hoverImgBack"></div>
+                            <div class="hoverDetail">Voir détail</div>
+                        </a>
+
+                    </div>
+                </div>
+                @*TABLE*@
+                <div class="infoPanier ">
+                    <table class="table table-responsive-sm ">
+                        <tbody>
+                            <tr>
+                                <th scope="col">Date</th>
+                                <td>@Model.Cmd.Date</td>
+                            </tr>
+                            <tr>
+                                <th scope="col">Prix</th>
+                                <td>@detail.Prix€</td>
+                            </tr>
+                            <tr>
+                                <th scope="col">Quantité</th>
+                                <td>
+                                    @{int v;
+                                        v = (detail.Quantite != 0) ? detail.Quantite : 1;
+                                    }
+                                    <input type="number" value="@v" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="col">Frais</th>
+                                <td>@prod.Frais€/kg</td>
+                            </tr>
+                            <tr>
+                                <th scope="col">ss-Total</th>
+                                <td>@ssTotal€</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            Total += ssTotal;
+        }
+    </div>
+}
+else
+{
+    <h1 class="panierVide text-black-50 text-center mt-5">Panier Vide</h1>
+
+}
+
+
