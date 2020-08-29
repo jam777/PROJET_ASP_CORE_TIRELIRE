@@ -24,8 +24,8 @@
                 Panier
             </li>
         </div>
-        <div class="totalPanier col-sm-6 text-sm-right text-center">
-            TOTAL : 132€
+        <div class="totalPanier mr-3 col-sm-6 text-sm-right text-center">
+            TOTAL : <span id="totalPanier">@ViewBag.Total</span> €
         </div>
     </ol>
     </nav>
@@ -34,15 +34,16 @@
 
 @if (Model != null)
 {
+    var DetailCommands = Model.Cmd.DetailCommande.ToArray();
 
-    <div class="row ListeCommande m-0">
-        @{ double ssTotal = 0, Total = 0;}
+    <div class="row ListeCommande  m-0">
 
-        @foreach (var detail in Model.Cmd.DetailCommande)
+        @for (int j = 0; j < DetailCommands.Length; j++)
         {
 
-            Produit prod = new Produit();
+            var detail = DetailCommands[j];
 
+            Produit prod = new Produit();
 
             foreach (var item in (ViewBag.prods as List<Produit>))
             {
@@ -52,7 +53,6 @@
                     break;
                 }
             }
-            ssTotal = detail.Prix * detail.Quantite + prod.Poids * prod.Frais;
 
             if (Model.Cmd.DetailCommande.Count == 1)
             {
@@ -63,17 +63,17 @@
                 </style>
             }
 
-            <div class="row detailCommande  justify-content-around  col-12 mx-0 mb-5 mt-3">
+            <div class=" row detailCommande  justify-content-around  col-12 mx-0 mb-5 mt-5">
 
                 @*DELETE*@
-                <div class="deletePanier align-self-center  mb-3 mb-sm-0">
+                <div class=" deletePanier align-self-center  mb-3 mb-sm-0">
                     <a href=@Url.Action("Supprimer", "Panier", new { id = detail.Idproduit })>
                         <i class="fas fa-trash-alt"></i>
                     </a>
                 </div>
                 @*TITRE IMAGE*@
-                <div class="titre-imgPanier  mb-3 mb-sm-0 ">
-                    <h3 class="titrePanier  mb-2">
+                <div class=" titre-imgPanier  mb-3 mb-sm-0 ">
+                    <h3 class="titrePanier  mb-2 mt-5 mt-sm-0">
                         @prod.Nom
                     </h3>
                     <div class="imgPanier hoverImg mb-3 mb-sm-0">
@@ -86,12 +86,12 @@
                     </div>
                 </div>
                 @*TABLE*@
-                <div class="infoPanier ">
-                    <table class="table table-responsive-sm ">
+                <div class=" infoPanier ">
+                    <table class="table w-100">
                         <tbody>
                             <tr>
                                 <th scope="col">Date</th>
-                                <td>@Model.Cmd.Date</td>
+                                <td><span id="date">@Model.Cmd.Date</span></td>
                             </tr>
                             <tr>
                                 <th scope="col">Prix</th>
@@ -100,10 +100,18 @@
                             <tr>
                                 <th scope="col">Quantité</th>
                                 <td>
-                                    @{int v;
-                                        v = (detail.Quantite != 0) ? detail.Quantite : 1;
-                                    }
-                                    <input type="number" value="@v" />
+
+                                    <select class="custom-select w-100 text-center" name="quantite" data-url=@Url.Action("CalculPanier", "Panier", new { id = detail.Idproduit })>
+                                        <option selected value="@detail.Quantite">@detail.Quantite</option>
+                                        @for (int i = 1; i <= 10; i++)
+                                        {
+                                            if (i == detail.Quantite)
+                                            {
+                                                continue;
+                                            }
+                                            <option value="@i" class="text-center">@i</option>
+                                        }
+                                    </select>
                                 </td>
                             </tr>
                             <tr>
@@ -112,19 +120,27 @@
                             </tr>
                             <tr>
                                 <th scope="col">ss-Total</th>
-                                <td>@ssTotal€</td>
+                                <td><span id="ssTotal">@ViewBag.ssTotaux[j] €</span></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-            </div>
-            Total += ssTotal;
-        }
-    </div>
-}
+
+            </div>@*detailCommande*@
+            <hr />
+        }@*foreach detail*@
+
+    </div>@*Liste commande *@
+}@*if*@
 else
 {
     <h1 class="panierVide text-black-50 text-center mt-5">Panier Vide</h1>
+
+}
+
+@section scripts
+{
+    <script src="~/js/DetailPanier.js"></script>
 
 }
 

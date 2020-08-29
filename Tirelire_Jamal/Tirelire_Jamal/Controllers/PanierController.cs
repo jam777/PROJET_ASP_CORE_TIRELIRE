@@ -168,7 +168,7 @@ namespace Tirelire_Jamal.Controllers
                     session.SetString("Panier", jsonPanier);
                 }
             }
-            /* return Content("bonjour id :" + id);*/
+
 
             return RedirectToAction("DetailPanier", "Panier");
         }
@@ -181,18 +181,108 @@ namespace Tirelire_Jamal.Controllers
         {
             PanierSession panierSession = deserialise();
             ViewBag.totalPanier = totalPanier();
+
             if (panierSession != null)
             {
                 ViewBag.Titre = "Commande : " + panierSession.Cmd.Date.ToString();
                 ViewBag.prods = _repo.FindAll().ToList();
+
+                List<double> ssTotaux = new List<double>();
+                double Total = 0;
+
+                foreach (var detail in panierSession.Cmd.DetailCommande)
+                {
+                    Produit prod = _repo.FindOne(detail.Idproduit);
+                    double ssTotal1 = ssTotal(detail, prod);
+
+                    ssTotaux.Add(ssTotal1);
+                    Total += ssTotal1;
+                }
+
+                ViewBag.ssTotaux = ssTotaux.ToArray();
+                ViewBag.Total = Total;
+
             }
             else
             {
                 ViewBag.Titre = "Détail Panier";
             }
-
             return View(panierSession);
         }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="quantite"></param>
+        /// <returns></returns>
+        public IActionResult CalculPanier(int id, int quantite)
+        {
+            PanierSession panierSession = deserialise();
+            var prod = _repo.FindOne(id);
+            Calcul cal = new Calcul();
+
+            if (panierSession != null)
+            {
+                DetailCommande detail = panierSession.Cmd.DetailCommande.Where(p => p.Idproduit == id).FirstOrDefault();
+
+                if (detail != null)
+                {
+                    detail.Quantite = quantite;
+                }
+
+                //Serialisation et MAJ session
+                string jsonPanier1 = JsonSerializer.Serialize(
+                panierSession
+                );
+                HttpContext.Session.SetString("Panier", jsonPanier1);
+
+                panierSession.Cmd.Date = DateTime.Now.ToString("d");
+
+                int quantiteTotal1 = 0;
+                double total = 0;
+                foreach (var d in panierSession.Cmd.DetailCommande)
+                {
+                    quantiteTotal1 += d.Quantite;
+                    Produit prod1 = _repo.FindOne(d.Idproduit);
+                    total += ssTotal(d, prod1);
+                }
+
+                panierSession.QuantiteAjoute = quantiteTotal1;
+
+                //Serialisation et MAJ session
+                string jsonPanier = JsonSerializer.Serialize(
+                panierSession
+                );
+                HttpContext.Session.SetString("Panier", jsonPanier);
+
+                cal = new Calcul()
+                {
+
+                    ssTotal = ssTotal(detail, prod),
+                    Total = total,
+                    quantiteTotal = quantiteTotal1,
+                    date = panierSession.Cmd.Date
+
+                };
+            }
+            return new JsonResult(cal);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="detail"></param>
+        /// <param name="prod"></param>
+        /// <returns></returns>
+        private double ssTotal(DetailCommande detail, Produit prod)
+        {
+            return (detail.Prix + prod.Frais * prod.Poids) * detail.Quantite;
+        }
+
+
+
 
         /// <summary>
         /// Permet de déserialiser une session

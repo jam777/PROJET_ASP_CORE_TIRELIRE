@@ -8,14 +8,10 @@ namespace Tirelire_Jamal.Services
     public class Calcul
     {
 
-        public static int sousTotal()
-        {
-
-
-
-
-            return 0;
-        }
+        public double ssTotal { get; set; }
+        public double Total { get; set; }
+        public double quantiteTotal { get; set; }
+        public string date { get; set; }
 
     }
 }

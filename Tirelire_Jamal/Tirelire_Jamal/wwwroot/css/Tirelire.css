@@ -110,8 +110,9 @@ html {
 .arial {
     position: fixed !important;
     width: 100%;
-    top: 60px;
+    top: 57px;
     z-index: 1000 !important;
+    padding-right: 45px;
 }
 
 /************************Titre Visiteur***********************/
@@ -282,6 +283,24 @@ td.poids, td.long, td.frais {
     font-weight: bold;
     color: red;
     font-size: 1.5rem;
+}
+
+
+.ListeCommande {
+    margin-top: 10rem !important;
+}
+
+    .ListeCommande .custom-select {
+        width: 20rem !important;
+    }
+
+    .ListeCommande table td {
+        font-weight: 700;
+    }
+
+hr {
+    border: 1px white solid;
+    width: 100%;
 }
 
 
