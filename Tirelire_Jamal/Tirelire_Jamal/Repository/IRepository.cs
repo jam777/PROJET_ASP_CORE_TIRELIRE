@@ -14,6 +14,8 @@ namespace Tirelire_Jamal.Repository
         //Récupère un objet
         T FindOne(int id);
 
+        public void Remove(T ligne);
+
 
 
     }

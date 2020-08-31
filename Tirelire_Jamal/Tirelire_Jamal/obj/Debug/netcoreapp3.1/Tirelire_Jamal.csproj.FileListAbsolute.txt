@@ -63,7 +63,6 @@ C:\Users\jamel\Desktop\Tirelire_Jam_ASP\Tirelire_Jamal\Tirelire_Jamal\obj\Debug\
 C:\Users\jamel\Desktop\Tirelire_Jam_ASP\Tirelire_Jamal\Tirelire_Jamal\obj\Debug\netcoreapp3.1\Tirelire_Jamal.TagHelpers.input.cache
 C:\Users\jamel\Desktop\Tirelire_Jam_ASP\Tirelire_Jamal\Tirelire_Jamal\obj\Debug\netcoreapp3.1\Tirelire_Jamal.TagHelpers.output.cache
 C:\Users\jamel\Desktop\Tirelire_Jam_ASP\Tirelire_Jamal\Tirelire_Jamal\obj\Debug\netcoreapp3.1\Tirelire_Jamal.RazorCoreGenerate.cache
-C:\Users\jamel\Desktop\Tirelire_Jam_ASP\Tirelire_Jamal\Tirelire_Jamal\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\_ViewStart.cshtml.g.cs
 C:\Users\jamel\Desktop\Tirelire_Jam_ASP\Tirelire_Jamal\Tirelire_Jamal\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Layout.cshtml.g.cs
 C:\Users\jamel\Desktop\Tirelire_Jam_ASP\Tirelire_Jamal\Tirelire_Jamal\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_LoginPartial.cshtml.g.cs
 C:\Users\jamel\Desktop\Tirelire_Jam_ASP\Tirelire_Jamal\Tirelire_Jamal\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
@@ -74,12 +73,6 @@ C:\Users\jamel\Desktop\Tirelire_Jam_ASP\Tirelire_Jamal\Tirelire_Jamal\obj\Debug\
 C:\Users\jamel\Desktop\Tirelire_Jam_ASP\Tirelire_Jamal\Tirelire_Jamal\obj\Debug\netcoreapp3.1\Tirelire_Jamal.csproj.CopyComplete
 C:\Users\jamel\Desktop\Tirelire_Jam_ASP\Tirelire_Jamal\Tirelire_Jamal\obj\Debug\netcoreapp3.1\staticwebassets\Tirelire_Jamal.StaticWebAssets.Manifest.cache
 C:\Users\jamel\Desktop\Tirelire_Jam_ASP\Tirelire_Jamal\Tirelire_Jamal\obj\Debug\netcoreapp3.1\staticwebassets\Tirelire_Jamal.StaticWebAssets.xml
-C:\Users\jamel\Desktop\Tirelire_Jam_ASP\Tirelire_Jamal\Tirelire_Jamal\bin\Debug\netcoreapp3.1\EntityFramework.SqlServer.dll
-C:\Users\jamel\Desktop\Tirelire_Jam_ASP\Tirelire_Jamal\Tirelire_Jamal\bin\Debug\netcoreapp3.1\EntityFramework.dll
-C:\Users\jamel\Desktop\Tirelire_Jam_ASP\Tirelire_Jamal\Tirelire_Jamal\bin\Debug\netcoreapp3.1\System.CodeDom.dll
-C:\Users\jamel\Desktop\Tirelire_Jam_ASP\Tirelire_Jamal\Tirelire_Jamal\bin\Debug\netcoreapp3.1\System.Data.SqlClient.dll
-C:\Users\jamel\Desktop\Tirelire_Jam_ASP\Tirelire_Jamal\Tirelire_Jamal\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
-C:\Users\jamel\Desktop\Tirelire_Jam_ASP\Tirelire_Jamal\Tirelire_Jamal\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
 C:\Users\jamel\Desktop\Tirelire_Jam_ASP\Tirelire_Jamal\Tirelire_Jamal\bin\Debug\netcoreapp3.1\Tirelire_Jamal.deps.json
 C:\Users\jamel\Desktop\Tirelire_Jam_ASP\Tirelire_Jamal\Tirelire_Jamal\bin\Debug\netcoreapp3.1\Tirelire_Jamal.runtimeconfig.json
 C:\Users\jamel\Desktop\Tirelire_Jam_ASP\Tirelire_Jamal\Tirelire_Jamal\bin\Debug\netcoreapp3.1\Tirelire_Jamal.runtimeconfig.dev.json
@@ -187,3 +180,7 @@ C:\Users\jamel\Desktop\Tirelire_Jam_ASP\Tirelire_Jamal\Tirelire_Jamal\bin\Debug\
 C:\Users\jamel\Desktop\Tirelire_Jam_ASP\Tirelire_Jamal\Tirelire_Jamal\obj\Debug\netcoreapp3.1\Tirelire_Jamal.csproj.CoreCompileInputs.cache
 C:\Users\jamel\Desktop\Tirelire_Jam_ASP\Tirelire_Jamal\Tirelire_Jamal\obj\Debug\netcoreapp3.1\Tirelire_Jamal.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\jamel\Desktop\Tirelire_Jam_ASP\Tirelire_Jamal\Tirelire_Jamal\obj\Debug\netcoreapp3.1\Tirelire_Jamal.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\jamel\Desktop\Tirelire_Jam_ASP\Tirelire_Jamal\Tirelire_Jamal\obj\Debug\netcoreapp3.1\Razor\Views\Account\Login.cshtml.g.cs
+C:\Users\jamel\Desktop\Tirelire_Jam_ASP\Tirelire_Jamal\Tirelire_Jamal\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Menu\_MenuAnonyme.cshtml.g.cs
+C:\Users\jamel\Desktop\Tirelire_Jam_ASP\Tirelire_Jamal\Tirelire_Jamal\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Menu\_MenuClient.cshtml.g.cs
+C:\Users\jamel\Desktop\Tirelire_Jam_ASP\Tirelire_Jamal\Tirelire_Jamal\obj\Debug\netcoreapp3.1\Razor\Views\Account\Register.cshtml.g.cs

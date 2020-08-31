@@ -27,7 +27,7 @@ using Tirelire_Jamal.Models;
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"fadf78e1840b697b57a98032d17583e46eb41e85", @"/Views/Shared/_modalPanier.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"1701ee15a60df5a26d67f6188219ef15f7cb7bf4", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"72d7c816e9aba37ca09835a49008e68de186ba53", @"/Views/_ViewImports.cshtml")]
     public class Views_Shared__modalPanier : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<Tirelire_Jamal.Models.Produit>
     {
         #pragma warning disable 1998

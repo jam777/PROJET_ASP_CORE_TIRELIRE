@@ -1,11 +1,12 @@
 ﻿using System;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Tirelire_Jamal.Models;
 
 namespace Tirelire_Jamal.Data
 {
-    public partial class Tirelire_JamContext : DbContext
+    public partial class Tirelire_JamContext : IdentityDbContext<Client>
     {
         public Tirelire_JamContext()
         {
@@ -30,12 +31,14 @@ namespace Tirelire_Jamal.Data
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Data Source=.\\sqlexpress;Initial Catalog=Tirelire_Jam;Integrated Security=True");
+                optionsBuilder.UseSqlServer("Data Source=.\\sqlexpress;Initial Catalog=TirelireDb;Integrated Security=True");
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<Adresse>(entity =>
             {
                 entity.Property(e => e.Id).HasColumnName("ID");
@@ -53,9 +56,17 @@ namespace Tirelire_Jamal.Data
 
             modelBuilder.Entity<Avis>(entity =>
             {
+                entity.HasIndex(e => e.Idclient);
+
+                entity.HasIndex(e => e.Idproduit);
+
                 entity.Property(e => e.Id).HasColumnName("ID");
 
-                entity.Property(e => e.Idclient).HasColumnName("IDClient");
+                entity.Property(e => e.Idclient)
+                    .IsRequired()
+                    .HasColumnName("IDClient")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Idproduit).HasColumnName("IDProduit");
 
@@ -74,14 +85,18 @@ namespace Tirelire_Jamal.Data
 
             modelBuilder.Entity<Client>(entity =>
             {
-                entity.Property(e => e.Id).HasColumnName("ID");
+                entity.HasIndex(e => e.Idadresse);
+
+                entity.Property(e => e.Id)
+                    .HasColumnName("ID")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.DateNaissance)
                     .HasColumnName("Date_Naissance")
                     .HasColumnType("date");
 
                 entity.Property(e => e.Email)
-                    .IsRequired()
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
@@ -110,6 +125,8 @@ namespace Tirelire_Jamal.Data
 
             modelBuilder.Entity<Commande>(entity =>
             {
+                entity.HasIndex(e => e.Idclient);
+
                 entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.Commentaire)
@@ -121,7 +138,10 @@ namespace Tirelire_Jamal.Data
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Idclient).HasColumnName("IDClient");
+                entity.Property(e => e.Idclient)
+                    .HasColumnName("IDClient")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Status)
                     .IsRequired()
@@ -146,6 +166,10 @@ namespace Tirelire_Jamal.Data
 
             modelBuilder.Entity<DetailCommande>(entity =>
             {
+                entity.HasIndex(e => e.Idcommande);
+
+                entity.HasIndex(e => e.Idproduit);
+
                 entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.Idcommande).HasColumnName("IDCommande");
@@ -176,6 +200,10 @@ namespace Tirelire_Jamal.Data
 
             modelBuilder.Entity<Produit>(entity =>
             {
+                entity.HasIndex(e => e.Idcouleur);
+
+                entity.HasIndex(e => e.Idfabricant);
+
                 entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.Description)

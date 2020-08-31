@@ -68,7 +68,8 @@
                 @*DELETE*@
                 <div class=" deletePanier align-self-center  mb-3 mb-sm-0">
                     <a href=@Url.Action("Supprimer", "Panier", new { id = detail.Idproduit })>
-                        <i class="fas fa-trash-alt"></i>
+                        @*<i class="fas fa-trash-alt"></i>*@
+                        <img src="/logo/delete.png" height="70" width="70" alt="delete Panier" />
                     </a>
                 </div>
                 @*TITRE IMAGE*@

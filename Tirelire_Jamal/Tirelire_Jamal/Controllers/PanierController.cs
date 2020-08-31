@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity.Infrastructure.Design;
+
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -14,9 +14,11 @@ using Tirelire_Jamal.Services;
 using Microsoft.AspNetCore.Authorization.Infrastructure;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System.Threading;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Tirelire_Jamal.Controllers
 {
+    [Authorize(Roles = "Client")]
     public class PanierController : Controller
     {
 

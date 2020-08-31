@@ -42,6 +42,10 @@ html {
     font-weight: bold;
     position: relative;
 }
+    
+    .nav-item a{
+        position:relative !important;
+    }
 
     .nav-item a:after {
         content: "";
@@ -71,10 +75,13 @@ html {
 }
 
 @media (max-width: 576px) {
+    .nav-item a{
+        display:inline-block;
+    }
     .nav-item a:after {
         content: "";
-        border-top: 4px solid red;
-        /*width: 100%;*/
+        border-top: 4px solid red !important;
+        width: 100%;
         position: absolute;
         bottom: 0;
         left: 0;
@@ -343,7 +350,10 @@ footer {
     margin-bottom: 0px;
     font-weight: bold;
 }
-
+/************************Register**************************/
+.register label{
+    font-weight:bold;
+}
 
 
 /***********************Responsive**************************/

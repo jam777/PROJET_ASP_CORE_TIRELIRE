@@ -1,0 +1,51 @@
+﻿<nav class="navbar navbar-expand-sm  navbar-toggleable-sm navbar-light bg-light border-bottom box-shadow mb-3 ">
+
+
+    <a class="navbar-brand" href="#">
+        <img src="/logo/Tirelire.png" width="40" height="40" alt="logo" loading="lazy">
+    </a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+            aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+
+        <ul class="navbar-nav flex-grow-1 justify-content-around pt-2">
+
+            @*ACCUEIL*@
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index"><span>Accueil</span> </a>
+            </li>
+
+            @*S'INSCRIRE*@
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">S'Inscrire</a>
+            </li>
+
+            @*LOGIN*@
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Se Connecter</a>
+            </li>
+
+            @*PANIER*@
+            <li class="nav-item">
+                <a href="@Url.Action("DetailPanier","Panier")" class="pb-0 nav-link text-dark">
+                    @*<i class="fas fa-shopping-cart"></i>*@
+                    <img  src="~/logo/panier.png" width="25" height="25" alt="Logo Panier" />
+                    @if (@ViewBag.totalPanier != 0)
+                    {
+                        <div class="nbProduit">@ViewBag.totalPanier</div>
+                    }
+                </a>
+            </li>
+
+            @*VISITEURS*@
+            <li class="nav-item">
+                <span class="nav-link text-dark">Visiteur(s)(15)</span>
+            </li>
+        </ul>
+    </div>
+
+</nav>

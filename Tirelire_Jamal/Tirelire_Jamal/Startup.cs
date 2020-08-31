@@ -11,7 +11,7 @@ using Tirelire_Jamal.Data;
 using Tirelire_Jamal.Models;
 using Tirelire_Jamal.Repository;
 using Tirelire_Jamal.Services;
-using Microsoft.AspNetCore.Builder;
+
 
 namespace Tirelire_Jamal
 {
@@ -36,8 +36,31 @@ namespace Tirelire_Jamal
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.AddIdentity<Client, IdentityRole>(options =>
+                {
+                    options.SignIn.RequireConfirmedEmail = false;
+                    options.SignIn.RequireConfirmedPhoneNumber = false;
+                    options.SignIn.RequireConfirmedAccount = false;
+                    options.Password.RequiredLength = 5;
+                    options.Password.RequiredUniqueChars = 3;
+                    options.Password.RequireDigit = true;
+                    options.Password.RequireNonAlphanumeric = true;
+                    options.Password.RequireUppercase = true;
+                    options.Password.RequireLowercase = false;
+                    options.User.RequireUniqueEmail = true;
+                    
+                }             
+                
+                
+                )
+                .AddEntityFrameworkStores<Tirelire_JamContext>();
+
+            services.AddScoped<ISessionTirelire, Session>();
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+           /* services.AddHttpContextAccessor();*/
 
             services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
 
@@ -62,7 +85,7 @@ namespace Tirelire_Jamal
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env,Tirelire_JamContext jamContext)
         {
             if (env.IsDevelopment())
             {
@@ -76,6 +99,10 @@ namespace Tirelire_Jamal
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+           /* jamContext.Database.EnsureDeleted();
+            jamContext.Database.EnsureCreated();*/
+
             app.UseHttpsRedirection();
 
             app.UseStaticFiles();

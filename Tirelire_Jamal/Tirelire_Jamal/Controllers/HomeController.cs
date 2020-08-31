@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
+
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,29 +17,34 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text.Json;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Tirelire_Jamal.Controllers
 {
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         private IRepository<Produit> _repo;
+        private ISessionTirelire _session;
 
-        public HomeController(IRepository<Produit> repo)
+        public HomeController(IRepository<Produit> repo, ISessionTirelire session)
         {
             _repo = repo;
+            _session = session;
         }
 
         /// <summary>
         /// Liste les articles
         /// </summary>
         /// <returns>Vue avec collection de produits</returns>
+        
         public IActionResult Index()
         {
             //Récupère tous les produits
             var prods = _repo.FindAll();
 
             ViewBag.Titre = "Liste des articles";
-            ViewBag.totalPanier = totalPanier();
+            ViewBag.totalPanier = _session.totalPanier();
 
             return View(prods);
         }
@@ -55,8 +60,7 @@ namespace Tirelire_Jamal.Controllers
             var prod = _repo.FindOne(id);
 
             //Les articles de même couleur
-
-            //On recupere la couleur de l'objet affiché
+            
             var ColorDetail = prod.IdcouleurNavigation;
             var prodsColor = ColorDetail.Produit.Take(4).ToList();
             prodsColor.Remove(prod);
@@ -69,13 +73,13 @@ namespace Tirelire_Jamal.Controllers
             };
 
             ViewBag.Titre = "Detail d'un article";
-            ViewBag.totalPanier = totalPanier();
-            ViewBag.quantitePanier = quantitePanier(id);
+            ViewBag.totalPanier = _session.totalPanier();
+            ViewBag.quantitePanier = _session.quantitePanier(id);
 
             double[] infoPanierModal = {
                 prod.Prix,
-                quantitePanier(id),
-                ((prod.Frais*prod.Poids+prod.Prix)*quantitePanier(id))
+                _session.quantitePanier(id),
+                ((prod.Frais*prod.Poids+prod.Prix)*_session.quantitePanier(id))
             };
 
             if (TempData["statusAjoutPanier"] != null)
@@ -86,75 +90,9 @@ namespace Tirelire_Jamal.Controllers
             {
                 ViewBag.statusAjoutPanier = 0;
             }
-
             ViewBag.infoPanierModal = infoPanierModal;
-
             return View(modelVue);
-
         }
-
-        /// <summary>
-        /// Permet de déserialiser une session
-        /// </summary>
-        /// <returns>PanierSeesion ou null</returns>
-        private PanierSession deserialise()
-        {
-            if (HttpContext.Session.GetString("Panier") != null)
-            {
-                return JsonSerializer.Deserialize<PanierSession>(HttpContext.Session.GetString("Panier"));
-            }
-            else
-            {
-                return null;
-            }
-
-        }
-
-        /// <summary>
-        /// Afficher le nombre total de produits dans le panier
-        /// </summary>
-        /// <returns>int ou 0</returns>
-        private int totalPanier()
-        {
-            if (deserialise() != null)
-            {
-                return deserialise().QuantiteAjoute;
-            }
-            else
-            {
-                return 0;
-            }
-        }
-
-        /// <summary>
-        /// Quantite pour un produit dans le panier
-        /// </summary>
-        /// <returns>int ou 0</returns>
-        private int quantitePanier(int id)
-        {
-            if (deserialise() != null)
-            {
-                PanierSession panierSession = deserialise();
-                var detail = panierSession.Cmd.DetailCommande.Where(p => p.Idproduit == id).FirstOrDefault();
-
-                if (detail != null)
-                {
-                    return detail.Quantite;
-                }
-                else
-                {
-                    return 0;
-                }
-            }
-            else
-            {
-                return 0;
-            }
-
-        }
-
-
-
     }
 
 }

@@ -7,7 +7,7 @@ namespace Tirelire_Jamal.Models
     {
         public int Id { get; set; }
         public int Idproduit { get; set; }
-        public int Idclient { get; set; }
+        public string Idclient { get; set; }
         public bool? Valide { get; set; }
 
         public virtual Client IdclientNavigation { get; set; }

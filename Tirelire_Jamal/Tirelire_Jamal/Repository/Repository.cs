@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Castle.Components.DictionaryAdapter;
 using Tirelire_Jamal.Data;
 using Tirelire_Jamal.Models;
 
@@ -38,6 +39,12 @@ namespace Tirelire_Jamal.Repository
 
         }
 
+
+        public void Remove(T ligne)
+        {
+            _ctx.Set<T>().Remove(ligne);
+            _ctx.SaveChanges();
+        }
 
     }
 }

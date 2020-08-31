@@ -16,49 +16,19 @@
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm  navbar-toggleable-sm navbar-light bg-light border-bottom box-shadow mb-3 ">
+        @if (User.Identity.IsAuthenticated)
+        {
+            if (User.IsInRole("Client"))
+            {
+                @Html.Partial("/Views/Shared/Menu/_MenuClient.cshtml");
+            }
 
+        }
+        else
+        {
+            @Html.Partial("/Views/Shared/Menu/_MenuAnonyme.cshtml");
+        }
 
-            <a class="navbar-brand" href="#">
-                <img src="/logo/Tirelire.png" width="40" height="40" alt="logo" loading="lazy">
-            </a>
-
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-
-                <ul class="navbar-nav flex-grow-1 justify-content-around">
-
-                    @*ACCUEIL*@
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Accueil</a>
-                    </li>
-
-                    @*LOGIN*@
-                    <partial name="_LoginPartial" />
-
-                    @*PANIER*@
-                    <li class="nav-item">
-                        <a href="@Url.Action("DetailPanier","Panier")" class="nav-link text-dark">
-                            <i class="fas fa-shopping-cart"></i>
-                            @if (@ViewBag.totalPanier != 0)
-                            {
-                                <div class="nbProduit">@ViewBag.totalPanier</div>
-                            }
-                        </a>
-                    </li>
-
-                    @*VISITEURS*@
-                    <li class="nav-item">
-                        <span class="nav-link text-dark">Visiteur(s)(15)</span>
-                    </li>
-                </ul>
-            </div>
-
-        </nav>
     </header>
 
     <div class="container">

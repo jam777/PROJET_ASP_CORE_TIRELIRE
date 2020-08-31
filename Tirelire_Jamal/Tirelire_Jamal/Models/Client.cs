@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Identity;
 
 namespace Tirelire_Jamal.Models
 {
-    public partial class Client
+    public partial class Client: IdentityUser
     {
         public Client()
         {
@@ -11,8 +13,10 @@ namespace Tirelire_Jamal.Models
             Commande = new HashSet<Commande>();
         }
 
-        public int Id { get; set; }
-        public string Email { get; set; }
+        public override string Id { get; set; }
+
+       
+        public override string Email { get; set; }
         public string Nom { get; set; }
         public string Prenom { get; set; }
         public bool Active { get; set; }
