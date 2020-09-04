@@ -18,6 +18,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Text.Json;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Authorization;
+using Tirelire_Jamal.Session;
 
 namespace Tirelire_Jamal.Controllers
 {
@@ -37,7 +38,7 @@ namespace Tirelire_Jamal.Controllers
         /// Liste les articles
         /// </summary>
         /// <returns>Vue avec collection de produits</returns>
-        
+
         public IActionResult Index()
         {
             //Récupère tous les produits
@@ -60,7 +61,7 @@ namespace Tirelire_Jamal.Controllers
             var prod = _repo.FindOne(id);
 
             //Les articles de même couleur
-            
+
             var ColorDetail = prod.IdcouleurNavigation;
             var prodsColor = ColorDetail.Produit.Take(4).ToList();
             prodsColor.Remove(prod);

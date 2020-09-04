@@ -42,10 +42,10 @@ html {
     font-weight: bold;
     position: relative;
 }
-    
-    .nav-item a{
-        position:relative !important;
-    }
+
+.nav-item a {
+    position: relative !important;
+}
 
     .nav-item a:after {
         content: "";
@@ -75,19 +75,20 @@ html {
 }
 
 @media (max-width: 576px) {
-    .nav-item a{
-        display:inline-block;
+    .nav-item a {
+        display: inline-block;
     }
-    .nav-item a:after {
-        content: "";
-        border-top: 4px solid red !important;
-        width: 100%;
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        transform: scaleX(0);
-        transition: transform 0.25s ease-in-out 0s;
-    }
+
+        .nav-item a:after {
+            content: "";
+            border-top: 4px solid red !important;
+            width: 100%;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            transform: scaleX(0);
+            transition: transform 0.25s ease-in-out 0s;
+        }
 }
 
 .nav-item a {
@@ -117,9 +118,23 @@ html {
 .arial {
     position: fixed !important;
     width: 100%;
-    top: 57px;
+    top: 69px;
     z-index: 1000 !important;
     padding-right: 45px;
+}
+
+@media (max-width: 576px) {
+    .arial {
+        top: 57px;
+    }
+
+    .ListeCommande form h4 {
+        text-align: center;
+    }
+
+    .ListeCommande form .btnCommande {
+        justify-content: center !important;
+    }
 }
 
 /************************Titre Visiteur***********************/
@@ -322,6 +337,10 @@ hr {
     }
 }
 
+/*****************************Commande**************************/
+.commande th, .commande td {
+    text-align: center;
+}
 
 /*****************************Footer**************************/
 footer {
@@ -351,8 +370,8 @@ footer {
     font-weight: bold;
 }
 /************************Register**************************/
-.register label{
-    font-weight:bold;
+.register label {
+    font-weight: bold;
 }
 
 

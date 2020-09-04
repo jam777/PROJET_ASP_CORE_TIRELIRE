@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -15,6 +14,7 @@ using Microsoft.AspNetCore.Authorization.Infrastructure;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System.Threading;
 using Microsoft.AspNetCore.Authorization;
+using Tirelire_Jamal.ViewModels;
 
 namespace Tirelire_Jamal.Controllers
 {
@@ -67,7 +67,7 @@ namespace Tirelire_Jamal.Controllers
                 {
                     quantiteTotal += detail.Quantite;
                 }
-                PanierSession panierSession = new PanierSession
+                PanierSessionViewModel panierSession = new PanierSessionViewModel
                 {
                     Cmd = cmd,
                     QuantiteAjoute = quantiteTotal
@@ -85,7 +85,7 @@ namespace Tirelire_Jamal.Controllers
             else
             {
                 //Deserialiser : pannierSession
-                PanierSession panierSession = JsonSerializer.Deserialize<PanierSession>(session.GetString("Panier"));
+                PanierSessionViewModel panierSession = JsonSerializer.Deserialize<PanierSessionViewModel>(session.GetString("Panier"));
 
                 //Panier Identique
 
@@ -142,7 +142,7 @@ namespace Tirelire_Jamal.Controllers
             //Panier Remplit
             if (session.GetString("Panier") != null)
             {
-                PanierSession panierSession = deserialise();
+                PanierSessionViewModel panierSession = deserialise();
 
                 int nbDetail = panierSession.Cmd.DetailCommande.Count;
 
@@ -181,7 +181,7 @@ namespace Tirelire_Jamal.Controllers
         /// <returns>Vue avec PannierSession</returns>
         public IActionResult DetailPanier()
         {
-            PanierSession panierSession = deserialise();
+            PanierSessionViewModel panierSession = deserialise();
             ViewBag.totalPanier = totalPanier();
 
             if (panierSession != null)
@@ -221,9 +221,9 @@ namespace Tirelire_Jamal.Controllers
         /// <returns></returns>
         public IActionResult CalculPanier(int id, int quantite)
         {
-            PanierSession panierSession = deserialise();
+            PanierSessionViewModel panierSession = deserialise();
             var prod = _repo.FindOne(id);
-            Calcul cal = new Calcul();
+            CalculViewModel cal = new CalculViewModel();
 
             if (panierSession != null)
             {
@@ -259,7 +259,7 @@ namespace Tirelire_Jamal.Controllers
                 );
                 HttpContext.Session.SetString("Panier", jsonPanier);
 
-                cal = new Calcul()
+                cal = new CalculViewModel()
                 {
 
                     ssTotal = ssTotal(detail, prod),
@@ -290,11 +290,11 @@ namespace Tirelire_Jamal.Controllers
         /// Permet de déserialiser une session
         /// </summary>
         /// <returns>PanierSeesion ou null</returns>
-        private PanierSession deserialise()
+        private PanierSessionViewModel deserialise()
         {
             if (HttpContext.Session.GetString("Panier") != null)
             {
-                return JsonSerializer.Deserialize<PanierSession>(HttpContext.Session.GetString("Panier"));
+                return JsonSerializer.Deserialize<PanierSessionViewModel>(HttpContext.Session.GetString("Panier"));
             }
             else
             {

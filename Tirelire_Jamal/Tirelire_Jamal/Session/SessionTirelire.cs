@@ -1,19 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Tirelire_Jamal.ViewModels;
 
-namespace Tirelire_Jamal.Services
+namespace Tirelire_Jamal.Session
 {
-    public class Session : ISessionTirelire
+    public class SessionTirelire : ISessionTirelire
     {
 
         private readonly IHttpContextAccessor _httpContext;
         private ISession _session;
 
-        public Session(IHttpContextAccessor httpContext)
+        public SessionTirelire(IHttpContextAccessor httpContext)
         {
             _httpContext = httpContext;
             _session = (ISession)httpContext.HttpContext.Session;
@@ -24,17 +26,17 @@ namespace Tirelire_Jamal.Services
         /// Permet de déserialiser une session
         /// </summary>
         /// <returns>PanierSeesion ou null</returns>
-        public PanierSession deserialise()
+        public PanierSessionViewModel deserialise()
         {
             if (_session.GetString("Panier") != null)
             {
-                return JsonSerializer.Deserialize<PanierSession>(_session.GetString("Panier"));
+                return JsonSerializer.Deserialize<PanierSessionViewModel>(_session.GetString("Panier"));
             }
             else
             {
                 return null;
             }
-            
+
         }
 
         /// <summary>
@@ -61,7 +63,7 @@ namespace Tirelire_Jamal.Services
         {
             if (deserialise() != null)
             {
-                PanierSession panierSession = deserialise();
+                PanierSessionViewModel panierSession = deserialise();
                 var detail = panierSession.Cmd.DetailCommande.Where(p => p.Idproduit == id).FirstOrDefault();
 
                 if (detail != null)
@@ -78,6 +80,15 @@ namespace Tirelire_Jamal.Services
                 return 0;
             }
 
+        }
+
+        public void clearSession()
+        {
+            PanierSessionViewModel panierSession = deserialise();
+            if (panierSession != null)
+            {
+                _session.Clear();
+            }
         }
 
 

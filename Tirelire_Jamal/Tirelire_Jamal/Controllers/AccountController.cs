@@ -10,14 +10,16 @@ using Tirelire_Jamal.Data;
 using Tirelire_Jamal.Models;
 using Tirelire_Jamal.Repository;
 using Tirelire_Jamal.Services;
+using Tirelire_Jamal.Session;
 using Tirelire_Jamal.ViewModels;
 
 namespace Tirelire_Jamal.Controllers
 {
+    [AllowAnonymous]
     public class AccountController : Controller
     {
         private ISessionTirelire _session;
-        private PanierSession _panierSession;
+        private PanierSessionViewModel _panierSession;
         private readonly SignInManager<Client> _signInManager;
         private readonly UserManager<Client> _userManager;
         private RoleManager<IdentityRole> _roleManager;
@@ -47,20 +49,20 @@ namespace Tirelire_Jamal.Controllers
         {
             if (ModelState.IsValid)
             {
-               /* var userName = _userManager.FindByEmailAsync(model.Email).Result.UserName;*/
+                /* var userName = _userManager.FindByEmailAsync(model.Email).Result.UserName;*/
                 var user = _userManager.FindByEmailAsync(model.Email).Result;
 
                 /*var check=_signInManager.UserManager.CheckPasswordAsync(user, model.Password);*/
 
                 await _signInManager.SignOutAsync();
 
-                if (user!=null)
+                if (user != null)
                 {
-                    var result = await _signInManager.PasswordSignInAsync(user, model.Password, false, false);                
-                
+                    var result = await _signInManager.PasswordSignInAsync(user, model.Password, false, false);
+
                     if (result.Succeeded)
-                    {                      
-                       return RedirectToAction("Index", "Home");
+                    {
+                        return RedirectToAction("Index", "Home");
                     }
                 }
                 else
@@ -68,6 +70,7 @@ namespace Tirelire_Jamal.Controllers
                     ModelState.AddModelError("", "Email ou Mot de Passe Invalide");
                 }
             }
+            ViewBag.totalPanier = _session.totalPanier();
             return View();
         }
 
@@ -84,20 +87,20 @@ namespace Tirelire_Jamal.Controllers
 
             if (ModelState.IsValid)
             {
-                var context = new Tirelire_JamContext();
-               
+
+
                 Adresse adresse = new Adresse()
                 {
                     AdFacturation = registerModel.AdresseFacturation,
                     AdLivraison = registerModel.AdresseLivraison
                 };
-                context.Adresse.Add(adresse);
-                context.SaveChanges();
-               
+                _repoAd.Create(adresse);
 
-                var IdAdresseRegister = _repoAd.FindAll().Where(p => p.AdFacturation == registerModel.AdresseFacturation).Select(p=>p.Id).FirstOrDefault();
 
-                Client clientUser = new Client() {
+                var IdAdresseRegister = _repoAd.FindAll().Where(p => p.AdFacturation == registerModel.AdresseFacturation).Select(p => p.Id).FirstOrDefault();
+
+                Client clientUser = new Client()
+                {
 
                     UserName = registerModel.UserName,
                     Nom = registerModel.Nom,
@@ -107,11 +110,11 @@ namespace Tirelire_Jamal.Controllers
                     Genre = registerModel.Genre,
                     Idadresse = IdAdresseRegister,
                     Email = registerModel.Email,
-                    Active = true                    
-                };               
+                    Active = true
+                };
 
                 var result = await _userManager.CreateAsync(clientUser, registerModel.Password);
-                
+
                 if (result.Succeeded)
                 {
 
@@ -132,22 +135,23 @@ namespace Tirelire_Jamal.Controllers
                         await _userManager.AddClaimAsync(clientUser, claim);
                     }
 
-                    var resultSignIn = await _signInManager.PasswordSignInAsync(registerModel.UserName, registerModel.Password,false, false);
+                    var resultSignIn = await _signInManager.PasswordSignInAsync(registerModel.UserName, registerModel.Password, false, false);
                     if (resultSignIn.Succeeded)
                     {
                         return RedirectToAction("Index", "Home");
                     }
                 }
                 else
-                {                       
+                {
                     _repoAd.Remove(_repoAd.FindOne(IdAdresseRegister));
 
                     foreach (var error in result.Errors)
                     {
                         ModelState.AddModelError("", error.Description);
                     }
-                }               
+                }
             }
+            ViewBag.totalPanier = _session.totalPanier();
             return View();
         }
 

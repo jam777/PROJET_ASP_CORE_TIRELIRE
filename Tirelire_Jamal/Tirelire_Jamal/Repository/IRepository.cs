@@ -14,7 +14,11 @@ namespace Tirelire_Jamal.Repository
         //Récupère un objet
         T FindOne(int id);
 
+        //Supprime un enregistrement
         public void Remove(T ligne);
+
+        //Créer un enregistrement
+        public void Create(T ligne);
 
 
 

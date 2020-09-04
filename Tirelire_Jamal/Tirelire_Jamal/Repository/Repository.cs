@@ -39,10 +39,19 @@ namespace Tirelire_Jamal.Repository
 
         }
 
-
+        /// <summary>
+        /// Suprimer un enregistrement
+        /// </summary>
+        /// <param name="ligne"></param>
         public void Remove(T ligne)
         {
             _ctx.Set<T>().Remove(ligne);
+            _ctx.SaveChanges();
+        }
+
+        public void Create(T ligne)
+        {
+            _ctx.Set<T>().Add(ligne);
             _ctx.SaveChanges();
         }
 

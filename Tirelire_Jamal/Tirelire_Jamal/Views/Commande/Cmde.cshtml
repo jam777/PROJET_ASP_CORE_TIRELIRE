@@ -1,0 +1,103 @@
+﻿@model Tirelire_Jamal.Models.Client
+
+@{
+    ViewData["Title"] = "Commande";
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item active" aria-current="page">
+            @Html.ActionLink("Accueil", "Index", "Home")
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">
+            Commande
+        </li>
+    </ol>
+</nav>
+<br />
+<div class="titre_visiteur mx-2 d-flex justify-content-between mb-3">
+    <div class="titre">
+        Liste des Commandes
+    </div>
+</div>
+<br />
+
+@if (Model.Commande.Count > 0)
+{
+    foreach (var cmde in Model.Commande)
+    {
+        <div class="titre_visiteur mx-2 d-flex justify-content-between mb-3">
+            <div class="titre">
+                Commande date : @cmde.Date
+            </div>
+            <div class="titre">
+                Status : @cmde.Status
+            </div>
+        </div>
+
+
+
+        <table class="commande w-100">
+            <thead class="thead-light">
+                <tr>
+                    <th>Produit</th>
+                    <th>Image</th>
+                    <th>Prix</th>
+                    <th>Quantité</th>
+                    <th>HxLxl</th>
+                    <th>Poids</th>
+                    <th>Frais</th>
+                    <th>ssTotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var detail in cmde.DetailCommande)
+                {
+                    <tr>
+                        @{Produit prod = new Produit();
+                        }
+
+                        @foreach (var item in (ViewBag.prods as List
+               <Produit>
+                   ))
+                        {
+                            if (detail.Idproduit == item.Id)
+                            {
+                                prod = item;
+                                break;
+                            }
+                        }
+                        <td>@prod.Nom</td>
+                        <td><img src="@prod.Image" height="30" width="30" alt="img_produit" /></td>
+                        <td>@detail.Prix €</td>
+                        <td>@detail.Quantite</td>
+                        <td>@prod.Hauteur x @prod.Longueur x @prod.Largeur</td>
+                        <td>@prod.Poids kg</td>
+                        <td>@prod.Frais kg/€</td>
+                        <td>115€</td>
+                    </tr>
+                }
+                <tr>
+                    <th>Total</th>
+                    <td colspan="6"></td>
+                    <td>23 €</td>
+                </tr>
+                <tr>
+                    <th>Commentaire</th>
+                    <td colspan="6"></td>
+                    <td>
+                        @* @if ()
+                            {
+
+                            }*@
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <br />
+    }
+}
+else
+{
+    <h1 class="panierVide text-black-50 text-center mt-5">Aucune Commande</h1>
+}

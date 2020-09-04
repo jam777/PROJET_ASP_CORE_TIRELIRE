@@ -184,3 +184,4 @@ C:\Users\jamel\Desktop\Tirelire_Jam_ASP\Tirelire_Jamal\Tirelire_Jamal\obj\Debug\
 C:\Users\jamel\Desktop\Tirelire_Jam_ASP\Tirelire_Jamal\Tirelire_Jamal\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Menu\_MenuAnonyme.cshtml.g.cs
 C:\Users\jamel\Desktop\Tirelire_Jam_ASP\Tirelire_Jamal\Tirelire_Jamal\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Menu\_MenuClient.cshtml.g.cs
 C:\Users\jamel\Desktop\Tirelire_Jam_ASP\Tirelire_Jamal\Tirelire_Jamal\obj\Debug\netcoreapp3.1\Razor\Views\Account\Register.cshtml.g.cs
+C:\Users\jamel\Desktop\Tirelire_Jam_ASP\Tirelire_Jamal\Tirelire_Jamal\obj\Debug\netcoreapp3.1\Razor\Views\Commande\Cmde.cshtml.g.cs

@@ -8,20 +8,27 @@ using Tirelire_Jamal.Models;
 using System.IO;
 using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.IdentityModel.Tokens;
+using Tirelire_Jamal.ViewModels;
+using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
 
 namespace Tirelire_Jamal.Controllers
 {
     public class FixturesController : Controller
     {
         private Tirelire_JamContext _ctx;
+        private readonly UserManager<Client> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public FixturesController(Tirelire_JamContext ctx)
+        public FixturesController(Tirelire_JamContext ctx, UserManager<Client> userManager = null, RoleManager<IdentityRole> roleManager = null)
         {
             _ctx = ctx;
+            _userManager = userManager;
+            _roleManager = roleManager;
         }
 
         [Route("Fixtures")]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             int NombreClient = 5;
             int NombreFabricant = 3;
@@ -40,13 +47,8 @@ namespace Tirelire_Jamal.Controllers
 
             }
 
-            //Remove table
-            Help.removeTable<Produit>(_ctx.Produit);
-            Help.removeTable<Fabricant>(_ctx.Fabricant);
-            Help.removeTable<Couleur>(_ctx.Couleur);
-            Help.removeTable<Adresse>(_ctx.Adresse);
-
-            _ctx.SaveChanges();
+            _ctx.Database.EnsureDeleted();
+            _ctx.Database.EnsureCreated();
 
             //Fixtures Adresse
             for (int i = 1; i <= NombreClient; i++)
@@ -132,6 +134,75 @@ namespace Tirelire_Jamal.Controllers
             }
 
             _ctx.SaveChanges();
+
+            //Enregistrer un client par defaut
+
+            RegisterViewModel registerModel = new RegisterViewModel()
+            {
+                RoleName = "Client",
+                AdresseFacturation = "Adresse1",
+                AdresseLivraison = "Adresse2",
+                UserName = "sponge",
+                Password = "Bob777%L",
+                Nom = "Eponge",
+                Prenom = "Bob",
+                DateNaissance = new DateTime(1978, 05, 01),
+                Telephone = "01-02-03-04-05",
+                Genre = true,
+                Email = "bob@bob",
+            };
+            Adresse adresse = new Adresse()
+            {
+                AdFacturation = registerModel.AdresseFacturation,
+                AdLivraison = registerModel.AdresseLivraison
+            };
+            _ctx.Adresse.Add(adresse);
+            _ctx.SaveChanges();
+
+            var IdAdresseRegister = _ctx.Adresse.Where(p => p.AdFacturation == registerModel.AdresseFacturation).Select(p => p.Id).FirstOrDefault();
+
+
+            Client clientUser = new Client()
+            {
+
+                UserName = registerModel.UserName,
+                Nom = registerModel.Nom,
+                Prenom = registerModel.Prenom,
+                DateNaissance = registerModel.DateNaissance,
+                Telephone = registerModel.Telephone,
+                Genre = registerModel.Genre,
+                Idadresse = IdAdresseRegister,
+                Email = registerModel.Email,
+                Active = true
+            };
+
+            var result = await _userManager.CreateAsync(clientUser, registerModel.Password);
+
+            if (result.Succeeded)
+            {
+
+                bool roleExists = await _roleManager.RoleExistsAsync(registerModel.RoleName);
+                if (!roleExists)
+                {
+                    await _roleManager.CreateAsync(new IdentityRole(registerModel.RoleName));
+                }
+
+                if (!await _userManager.IsInRoleAsync(clientUser, registerModel.RoleName))
+                {
+                    await _userManager.AddToRoleAsync(clientUser, registerModel.RoleName);
+                }
+
+                if (!string.IsNullOrWhiteSpace(clientUser.Email))
+                {
+                    Claim claim = new Claim(ClaimTypes.Email, clientUser.Email);
+                    await _userManager.AddClaimAsync(clientUser, claim);
+                }
+
+
+            }
+
+
+
             return Content("Fixtures terminées");
         }
     }

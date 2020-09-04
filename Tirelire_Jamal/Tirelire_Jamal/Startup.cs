@@ -6,12 +6,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Security.Claims;
 using System;
 using Tirelire_Jamal.Data;
 using Tirelire_Jamal.Models;
 using Tirelire_Jamal.Repository;
 using Tirelire_Jamal.Services;
-
+using Tirelire_Jamal.Session;
 
 namespace Tirelire_Jamal
 {
@@ -49,18 +50,16 @@ namespace Tirelire_Jamal
                     options.Password.RequireUppercase = true;
                     options.Password.RequireLowercase = false;
                     options.User.RequireUniqueEmail = true;
-                    
-                }             
-                
-                
+
+                }
                 )
                 .AddEntityFrameworkStores<Tirelire_JamContext>();
 
-            services.AddScoped<ISessionTirelire, Session>();
+            services.AddScoped<ISessionTirelire, SessionTirelire>();
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-           /* services.AddHttpContextAccessor();*/
+            /* services.AddHttpContextAccessor();*/
 
             services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
 
@@ -85,7 +84,7 @@ namespace Tirelire_Jamal
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env,Tirelire_JamContext jamContext)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, Tirelire_JamContext jamContext)
         {
             if (env.IsDevelopment())
             {
@@ -100,8 +99,8 @@ namespace Tirelire_Jamal
                 app.UseHsts();
             }
 
-           /* jamContext.Database.EnsureDeleted();
-            jamContext.Database.EnsureCreated();*/
+            jamContext.Database.EnsureDeleted();
+            jamContext.Database.EnsureCreated();
 
             app.UseHttpsRedirection();
 

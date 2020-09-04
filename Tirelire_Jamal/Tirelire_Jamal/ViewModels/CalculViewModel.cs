@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Tirelire_Jamal.Services
+namespace Tirelire_Jamal.ViewModels
 {
-    public class Calcul
+    public class CalculViewModel
     {
 
         public double ssTotal { get; set; }

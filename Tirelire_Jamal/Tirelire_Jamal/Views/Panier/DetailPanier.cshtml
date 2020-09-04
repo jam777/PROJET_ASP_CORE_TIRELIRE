@@ -1,4 +1,4 @@
-﻿@model Tirelire_Jamal.Services.PanierSession
+﻿@model Tirelire_Jamal.ViewModels.PanierSessionViewModel
 
 @{
     ViewData["Title"] = "DetailPanier";
@@ -28,7 +28,7 @@
             TOTAL : <span id="totalPanier">@ViewBag.Total</span> €
         </div>
     </ol>
-    </nav>
+
 </div>
 
 
@@ -36,9 +36,9 @@
 {
     var DetailCommands = Model.Cmd.DetailCommande.ToArray();
 
-    <div class="row ListeCommande  m-0">
+<div class="row ListeCommande  m-0">
 
-        @for (int j = 0; j < DetailCommands.Length; j++)
+    @for (int j = 0; j < DetailCommands.Length; j++)
         {
 
             var detail = DetailCommands[j];
@@ -56,86 +56,98 @@
 
             if (Model.Cmd.DetailCommande.Count == 1)
             {
-                <style>
-                    footer {
-                        bottom: -120px !important;
-                    }
-                </style>
+    <style>
+        footer {
+            bottom: -120px !important;
+        }
+    </style>
             }
 
-            <div class=" row detailCommande  justify-content-around  col-12 mx-0 mb-5 mt-5">
+    <div class=" row detailCommande  justify-content-around  col-12 mx-0 mb-5 mt-5">
 
-                @*DELETE*@
-                <div class=" deletePanier align-self-center  mb-3 mb-sm-0">
-                    <a href=@Url.Action("Supprimer", "Panier", new { id = detail.Idproduit })>
-                        @*<i class="fas fa-trash-alt"></i>*@
-                        <img src="/logo/delete.png" height="70" width="70" alt="delete Panier" />
-                    </a>
-                </div>
-                @*TITRE IMAGE*@
-                <div class=" titre-imgPanier  mb-3 mb-sm-0 ">
-                    <h3 class="titrePanier  mb-2 mt-5 mt-sm-0">
-                        @prod.Nom
-                    </h3>
-                    <div class="imgPanier hoverImg mb-3 mb-sm-0">
-                        <a href=@Url.Action("Detail", "Home", new { id = detail.Idproduit }) class="d-block">
-                            <img src="@prod.Image" alt="imgProd" class="d-block" />
-                            <div class="hoverImgBack"></div>
-                            <div class="hoverDetail">Voir détail</div>
-                        </a>
+        @*DELETE*@
+        <div class=" deletePanier align-self-center  mb-3 mb-sm-0">
+            <a href=@Url.Action("Supprimer", "Panier", new { id = detail.Idproduit })>
+                @*<i class="fas fa-trash-alt"></i>*@
+                <img src="/logo/delete.png" height="70" width="70" alt="delete Panier" />
+            </a>
+        </div>
+        @*TITRE IMAGE*@
+        <div class=" titre-imgPanier  mb-3 mb-sm-0 ">
+            <h3 class="titrePanier  mb-2 mt-5 mt-sm-0">
+                @prod.Nom
+            </h3>
+            <div class="imgPanier hoverImg mb-3 mb-sm-0">
+                <a href=@Url.Action("Detail", "Home", new { id = detail.Idproduit }) class="d-block">
+                    <img src="@prod.Image" alt="imgProd" class="d-block" />
+                    <div class="hoverImgBack"></div>
+                    <div class="hoverDetail">Voir détail</div>
+                </a>
 
-                    </div>
-                </div>
-                @*TABLE*@
-                <div class=" infoPanier ">
-                    <table class="table w-100">
-                        <tbody>
-                            <tr>
-                                <th scope="col">Date</th>
-                                <td><span id="date">@Model.Cmd.Date</span></td>
-                            </tr>
-                            <tr>
-                                <th scope="col">Prix</th>
-                                <td>@detail.Prix€</td>
-                            </tr>
-                            <tr>
-                                <th scope="col">Quantité</th>
-                                <td>
+            </div>
+        </div>
+        @*TABLE*@
+        <div class=" infoPanier ">
+            <table class="table table-responsive-sm w-100">
+                <tbody>
+                    <tr>
+                        <th scope="col">Date</th>
+                        <td><span id="date">@Model.Cmd.Date</span></td>
+                    </tr>
+                    <tr>
+                        <th scope="col">Prix</th>
+                        <td>@detail.Prix€</td>
+                    </tr>
+                    <tr>
+                        <th scope="col">Quantité</th>
+                        <td>
 
-                                    <select class="custom-select w-100 text-center" name="quantite" data-url=@Url.Action("CalculPanier", "Panier", new { id = detail.Idproduit })>
-                                        <option selected value="@detail.Quantite">@detail.Quantite</option>
-                                        @for (int i = 1; i <= 10; i++)
+                            <select class="custom-select w-100 text-center" name="quantite" data-url=@Url.Action("CalculPanier", "Panier", new { id = detail.Idproduit })>
+                                <option selected value="@detail.Quantite">@detail.Quantite</option>
+                                @for (int i = 1; i <= 10; i++)
                                         {
                                             if (i == detail.Quantite)
                                             {
                                                 continue;
                                             }
-                                            <option value="@i" class="text-center">@i</option>
+                                <option value="@i" class="text-center">@i</option>
                                         }
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="col">Frais</th>
-                                <td>@prod.Frais€/kg</td>
-                            </tr>
-                            <tr>
-                                <th scope="col">ss-Total</th>
-                                <td><span id="ssTotal">@ViewBag.ssTotaux[j] €</span></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="col">Frais</th>
+                        <td>@prod.Frais€/kg</td>
+                    </tr>
+                    <tr>
+                        <th scope="col">ss-Total</th>
+                        <td><span id="ssTotal">@ViewBag.ssTotaux[j] €</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
-            </div>@*detailCommande*@
-            <hr />
+    </div>@*detailCommande*@
+    <hr />
         }@*foreach detail*@
+
+        @*NOTE DE COMMANDE*@
+
+        <form action=@Url.Action("Ajouter","Commande") method="post" class="row  ml-0 col-sm-6 p-0">
+            <h4 class="my-2">Note de Commande (Facultatif)</h4>
+            <textarea class="form-control " rows="5" name="Commentaire" style="font-size:1.5rem;"></textarea>
+            <div class="row btnCommande justify-content-between m-0 w-100 mt-2">
+                <button class="btn btn-primary btn-lg m-sm-0 m-2" type="submit">Commander</button>
+                <a href=@Url.Action("Index","Home") class="btn btn-primary m-sm-0 m-2 btn-lg">Poursuivre les achats</a>
+            </div>
+        </form>
+
 
     </div>@*Liste commande *@
 }@*if*@
 else
 {
-    <h1 class="panierVide text-black-50 text-center mt-5">Panier Vide</h1>
+<h1 class="panierVide text-black-50 text-center mt-5">Panier Vide</h1>
 
 }
 
