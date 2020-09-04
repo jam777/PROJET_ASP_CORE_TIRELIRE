@@ -11,7 +11,7 @@ namespace Tirelire_Jamal.Models
         public bool? Valide { get; set; }
 
         public virtual Commande IdNavigation { get; set; }
-        public virtual Client IdclientNavigation { get; set; }
+        public virtual AspNetUsers IdclientNavigation { get; set; }
         public virtual Produit IdproduitNavigation { get; set; }
     }
 }
