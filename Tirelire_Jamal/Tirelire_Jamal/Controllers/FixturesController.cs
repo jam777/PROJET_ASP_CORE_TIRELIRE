@@ -146,7 +146,7 @@ namespace Tirelire_Jamal.Controllers
                 Password = "Bob777%L",
                 Nom = "Eponge",
                 Prenom = "Bob",
-                DateNaissance = new DateTime(1978, 05, 01),
+                DateNaissance = "02/05/1980",
                 Telephone = "01-02-03-04-05",
                 Genre = true,
                 Email = "bob@bob",
@@ -165,10 +165,10 @@ namespace Tirelire_Jamal.Controllers
             Client clientUser = new Client()
             {
 
-                /*UserName = registerModel.UserName,
+                UserName = registerModel.UserName,
                 Nom = registerModel.Nom,
                 Prenom = registerModel.Prenom,
-                DateNaissance = registerModel.DateNaissance,*/
+                DateNaissance = registerModel.DateNaissance,
                 Telephone = registerModel.Telephone,
                 Genre = registerModel.Genre,
                 Idadresse = IdAdresseRegister,

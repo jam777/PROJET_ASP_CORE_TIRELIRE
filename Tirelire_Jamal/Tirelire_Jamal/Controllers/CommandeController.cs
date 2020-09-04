@@ -55,6 +55,7 @@ namespace Tirelire_Jamal.Controllers
             foreach (var detail in cmd.DetailCommande)
             {
                 Avis avis = new Avis();
+                avis.Idcommande = cmd.Id;
                 avis.Idclient = cmd.Idclient;
                 avis.Idproduit = detail.Idproduit;
                 avis.Valide = false;
@@ -73,7 +74,7 @@ namespace Tirelire_Jamal.Controllers
 
             ViewBag.prods = prods;
             ViewBag.totalPanier = _session.totalPanier();
-            @ViewBag.Titre = "Liste des Commandes";
+            ViewBag.Titre = "Liste des Commandes";
 
             return View(user);
         }

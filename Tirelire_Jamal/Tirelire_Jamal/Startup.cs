@@ -99,8 +99,8 @@ namespace Tirelire_Jamal
                 app.UseHsts();
             }
 
-            jamContext.Database.EnsureDeleted();
-            jamContext.Database.EnsureCreated();
+            /*jamContext.Database.EnsureDeleted();
+            jamContext.Database.EnsureCreated();*/
 
             app.UseHttpsRedirection();
 

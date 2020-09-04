@@ -22,7 +22,7 @@
 </div>
 <br />
 
-@if (Model.Commande.Count > 0)
+@if (Model.Commande.Count > 0 || Model.Commande != null)
 {
     foreach (var cmde in Model.Commande)
     {
@@ -58,8 +58,8 @@
                         }
 
                         @foreach (var item in (ViewBag.prods as List
-               <Produit>
-                   ))
+             <Produit>
+                 ))
                         {
                             if (detail.Idproduit == item.Id)
                             {

@@ -1,11 +1,12 @@
 ﻿using System;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Tirelire_Jamal.Models;
 
 namespace Tirelire_Jamal.Data
 {
-    public partial class Tirelire_JamContext : DbContext
+    public partial class Tirelire_JamContext : IdentityDbContext<Client>
     {
         public Tirelire_JamContext()
         {
@@ -17,14 +18,8 @@ namespace Tirelire_Jamal.Data
         }
 
         public virtual DbSet<Adresse> Adresse { get; set; }
-        public virtual DbSet<AspNetRoleClaims> AspNetRoleClaims { get; set; }
-        public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
-        public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
-        public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
-        public virtual DbSet<AspNetUserRoles> AspNetUserRoles { get; set; }
-        public virtual DbSet<AspNetUserTokens> AspNetUserTokens { get; set; }
-        public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
         public virtual DbSet<Avis> Avis { get; set; }
+        public virtual DbSet<Client> Client { get; set; }
         public virtual DbSet<Commande> Commande { get; set; }
         public virtual DbSet<Couleur> Couleur { get; set; }
         public virtual DbSet<DetailCommande> DetailCommande { get; set; }
@@ -42,6 +37,8 @@ namespace Tirelire_Jamal.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<Adresse>(entity =>
             {
                 entity.Property(e => e.Id).HasColumnName("ID");
@@ -57,103 +54,40 @@ namespace Tirelire_Jamal.Data
                     .IsUnicode(false);
             });
 
-            modelBuilder.Entity<AspNetRoleClaims>(entity =>
+            modelBuilder.Entity<Avis>(entity =>
             {
-                entity.HasIndex(e => e.RoleId);
+                entity.Property(e => e.Id).HasColumnName("ID");
 
-                entity.Property(e => e.RoleId).IsRequired();
-
-                entity.HasOne(d => d.Role)
-                    .WithMany(p => p.AspNetRoleClaims)
-                    .HasForeignKey(d => d.RoleId);
-            });
-
-            modelBuilder.Entity<AspNetRoles>(entity =>
-            {
-                entity.HasIndex(e => e.NormalizedName)
-                    .HasName("RoleNameIndex")
-                    .IsUnique()
-                    .HasFilter("([NormalizedName] IS NOT NULL)");
-
-                entity.Property(e => e.Name).HasMaxLength(256);
-
-                entity.Property(e => e.NormalizedName).HasMaxLength(256);
-            });
-
-            modelBuilder.Entity<AspNetUserClaims>(entity =>
-            {
-                entity.HasIndex(e => e.UserId);
-
-                entity.Property(e => e.UserId)
+                entity.Property(e => e.Idclient)
                     .IsRequired()
+                    .HasColumnName("IDClient")
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.AspNetUserClaims)
-                    .HasForeignKey(d => d.UserId);
+                entity.Property(e => e.Idcommande).HasColumnName("IDCommande");
+
+                entity.Property(e => e.Idproduit).HasColumnName("IDProduit");
+
+                entity.HasOne(d => d.IdclientNavigation)
+                    .WithMany(p => p.Avis)
+                    .HasForeignKey(d => d.Idclient)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Avis_Client");
+
+                entity.HasOne(d => d.IdcommandeNavigation)
+                    .WithMany(p => p.Avis)
+                    .HasForeignKey(d => d.Idcommande)
+                    .HasConstraintName("FK_Avis_Commande");
+
+                entity.HasOne(d => d.IdproduitNavigation)
+                    .WithMany(p => p.Avis)
+                    .HasForeignKey(d => d.Idproduit)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Avis_Produit");
             });
 
-            modelBuilder.Entity<AspNetUserLogins>(entity =>
+            modelBuilder.Entity<Client>(entity =>
             {
-                entity.HasKey(e => new { e.LoginProvider, e.ProviderKey });
-
-                entity.HasIndex(e => e.UserId);
-
-                entity.Property(e => e.UserId)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.AspNetUserLogins)
-                    .HasForeignKey(d => d.UserId);
-            });
-
-            modelBuilder.Entity<AspNetUserRoles>(entity =>
-            {
-                entity.HasKey(e => new { e.UserId, e.RoleId });
-
-                entity.HasIndex(e => e.RoleId);
-
-                entity.Property(e => e.UserId)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.HasOne(d => d.Role)
-                    .WithMany(p => p.AspNetUserRoles)
-                    .HasForeignKey(d => d.RoleId);
-
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.AspNetUserRoles)
-                    .HasForeignKey(d => d.UserId);
-            });
-
-            modelBuilder.Entity<AspNetUserTokens>(entity =>
-            {
-                entity.HasKey(e => new { e.UserId, e.LoginProvider, e.Name });
-
-                entity.Property(e => e.UserId)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.AspNetUserTokens)
-                    .HasForeignKey(d => d.UserId);
-            });
-
-            modelBuilder.Entity<AspNetUsers>(entity =>
-            {
-                entity.HasIndex(e => e.Idadresse);
-
-                entity.HasIndex(e => e.NormalizedEmail)
-                    .HasName("EmailIndex");
-
-                entity.HasIndex(e => e.NormalizedUserName)
-                    .HasName("UserNameIndex")
-                    .IsUnique()
-                    .HasFilter("([NormalizedUserName] IS NOT NULL)");
-
                 entity.Property(e => e.Id)
                     .HasColumnName("ID")
                     .HasMaxLength(50)
@@ -176,10 +110,6 @@ namespace Tirelire_Jamal.Data
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.NormalizedEmail).HasMaxLength(256);
-
-                entity.Property(e => e.NormalizedUserName).HasMaxLength(256);
-
                 entity.Property(e => e.Prenom)
                     .IsRequired()
                     .HasMaxLength(50)
@@ -190,58 +120,17 @@ namespace Tirelire_Jamal.Data
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.UserName).HasMaxLength(256);
-
                 entity.HasOne(d => d.IdadresseNavigation)
-                    .WithMany(p => p.AspNetUsers)
+                    .WithMany(p => p.Client)
                     .HasForeignKey(d => d.Idadresse)
                     .HasConstraintName("FK_Client_Adresse");
             });
 
-            modelBuilder.Entity<Avis>(entity =>
+            modelBuilder.Entity<Commande>(entity =>
             {
-                entity.HasIndex(e => e.Idclient);
-
-                entity.HasIndex(e => e.Idproduit);
-
                 entity.Property(e => e.Id)
                     .HasColumnName("ID")
                     .ValueGeneratedOnAdd();
-
-                entity.Property(e => e.Idclient)
-                    .IsRequired()
-                    .HasColumnName("IDClient")
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Idproduit).HasColumnName("IDProduit");
-
-                entity.HasOne(d => d.IdNavigation)
-                    .WithOne(p => p.Avis)
-                    .HasForeignKey<Avis>(d => d.Id)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Avis_Commande");
-
-                entity.HasOne(d => d.IdclientNavigation)
-                    .WithMany(p => p.Avis)
-                    .HasForeignKey(d => d.Idclient)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Avis_Client");
-
-                entity.HasOne(d => d.IdproduitNavigation)
-                    .WithMany(p => p.Avis)
-                    .HasForeignKey(d => d.Idproduit)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Avis_Produit");
-            });
-
-            modelBuilder.Entity<Commande>(entity =>
-            {
-                entity.HasIndex(e => e.Idclient);
-
-                entity.Property(e => e.Id)
-                    .HasColumnName("ID")
-                    .ValueGeneratedNever();
 
                 entity.Property(e => e.Commentaire)
                     .IsRequired()
@@ -280,10 +169,6 @@ namespace Tirelire_Jamal.Data
 
             modelBuilder.Entity<DetailCommande>(entity =>
             {
-                entity.HasIndex(e => e.Idcommande);
-
-                entity.HasIndex(e => e.Idproduit);
-
                 entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.Idcommande).HasColumnName("IDCommande");
@@ -314,10 +199,6 @@ namespace Tirelire_Jamal.Data
 
             modelBuilder.Entity<Produit>(entity =>
             {
-                entity.HasIndex(e => e.Idcouleur);
-
-                entity.HasIndex(e => e.Idfabricant);
-
                 entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.Description)

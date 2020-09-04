@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Tirelire_Jamal.Data;
 
-namespace Tirelire_Jamal.Migrations.TirelireDb
+namespace Tirelire_Jamal.Migrations
 {
     [DbContext(typeof(Tirelire_JamContext))]
-    partial class Tirelire_JamContextModelSnapshot : ModelSnapshot
+    [Migration("20200904160314_Identity")]
+    partial class Identity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -190,6 +192,10 @@ namespace Tirelire_Jamal.Migrations.TirelireDb
                         .HasMaxLength(50)
                         .IsUnicode(false);
 
+                    b.Property<int?>("Idcommande")
+                        .HasColumnName("IDCommande")
+                        .HasColumnType("int");
+
                     b.Property<int>("Idproduit")
                         .HasColumnName("IDProduit")
                         .HasColumnType("int");
@@ -200,6 +206,8 @@ namespace Tirelire_Jamal.Migrations.TirelireDb
                     b.HasKey("Id");
 
                     b.HasIndex("Idclient");
+
+                    b.HasIndex("Idcommande");
 
                     b.HasIndex("Idproduit");
 
@@ -315,8 +323,10 @@ namespace Tirelire_Jamal.Migrations.TirelireDb
             modelBuilder.Entity("Tirelire_Jamal.Models.Commande", b =>
                 {
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnName("ID")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Commentaire")
                         .IsRequired()
@@ -535,17 +545,16 @@ namespace Tirelire_Jamal.Migrations.TirelireDb
 
             modelBuilder.Entity("Tirelire_Jamal.Models.Avis", b =>
                 {
-                    b.HasOne("Tirelire_Jamal.Models.Commande", "IdNavigation")
-                        .WithOne("Avis")
-                        .HasForeignKey("Tirelire_Jamal.Models.Avis", "Id")
-                        .HasConstraintName("FK_Avis_Commande")
-                        .IsRequired();
-
                     b.HasOne("Tirelire_Jamal.Models.Client", "IdclientNavigation")
                         .WithMany("Avis")
                         .HasForeignKey("Idclient")
                         .HasConstraintName("FK_Avis_Client")
                         .IsRequired();
+
+                    b.HasOne("Tirelire_Jamal.Models.Commande", "IdcommandeNavigation")
+                        .WithMany("Avis")
+                        .HasForeignKey("Idcommande")
+                        .HasConstraintName("FK_Avis_Commande");
 
                     b.HasOne("Tirelire_Jamal.Models.Produit", "IdproduitNavigation")
                         .WithMany("Avis")

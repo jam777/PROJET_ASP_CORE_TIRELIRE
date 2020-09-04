@@ -5,13 +5,13 @@ using System.Threading.Tasks;
 
 namespace Tirelire_Jamal.ViewModels
 {
-    public class RegisterViewModel:LoginViewModel
+    public class RegisterViewModel : LoginViewModel
     {
 
         public string UserName { get; set; }
         public string Nom { get; set; }
-        public string Prenom { get; set; }       
-        public DateTime DateNaissance { get; set; }
+        public string Prenom { get; set; }
+        public string DateNaissance { get; set; }
         public string Telephone { get; set; }
         public bool Genre { get; set; }
         public string AdresseLivraison { get; set; }

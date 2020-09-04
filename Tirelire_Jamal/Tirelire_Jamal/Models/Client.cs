@@ -12,8 +12,8 @@ namespace Tirelire_Jamal.Models
             Commande = new HashSet<Commande>();
         }
 
-        public string Id { get; set; }
-        public string Email { get; set; }
+        public override string Id { get; set; }
+        public override string Email { get; set; }
         public string Nom { get; set; }
         public string Prenom { get; set; }
         public bool Active { get; set; }

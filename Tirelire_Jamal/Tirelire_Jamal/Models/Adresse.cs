@@ -7,13 +7,13 @@ namespace Tirelire_Jamal.Models
     {
         public Adresse()
         {
-            AspNetUsers = new HashSet<AspNetUsers>();
+            Client = new HashSet<Client>();
         }
 
         public int Id { get; set; }
         public string AdLivraison { get; set; }
         public string AdFacturation { get; set; }
 
-        public virtual ICollection<AspNetUsers> AspNetUsers { get; set; }
+        public virtual ICollection<Client> Client { get; set; }
     }
 }
