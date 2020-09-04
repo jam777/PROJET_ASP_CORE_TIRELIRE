@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Tirelire_Jamal.Data;
 
 namespace Tirelire_Jamal.Migrations.TirelireDb
 {
     [DbContext(typeof(Tirelire_JamContext))]
-    partial class Tirelire_JamContextModelSnapshot : ModelSnapshot
+    [Migration("20200904124125_Identity")]
+    partial class Identity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
