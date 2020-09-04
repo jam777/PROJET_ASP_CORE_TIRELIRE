@@ -165,10 +165,10 @@ namespace Tirelire_Jamal.Controllers
             Client clientUser = new Client()
             {
 
-                UserName = registerModel.UserName,
+                /*UserName = registerModel.UserName,
                 Nom = registerModel.Nom,
                 Prenom = registerModel.Prenom,
-                DateNaissance = registerModel.DateNaissance,
+                DateNaissance = registerModel.DateNaissance,*/
                 Telephone = registerModel.Telephone,
                 Genre = registerModel.Genre,
                 Idadresse = IdAdresseRegister,

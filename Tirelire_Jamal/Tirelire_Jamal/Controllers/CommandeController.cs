@@ -55,7 +55,6 @@ namespace Tirelire_Jamal.Controllers
             foreach (var detail in cmd.DetailCommande)
             {
                 Avis avis = new Avis();
-                avis.Id = cmd.Id;
                 avis.Idclient = cmd.Idclient;
                 avis.Idproduit = detail.Idproduit;
                 avis.Valide = false;

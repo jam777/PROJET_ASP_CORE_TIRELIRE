@@ -37,10 +37,9 @@ namespace Tirelire_Jamal.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
-
             modelBuilder.Entity<Adresse>(entity =>
             {
+                base.OnModelCreating(modelBuilder);
                 entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.AdFacturation)
@@ -60,7 +59,9 @@ namespace Tirelire_Jamal.Data
 
                 entity.HasIndex(e => e.Idproduit);
 
-                entity.Property(e => e.Id).HasColumnName("ID");
+                entity.Property(e => e.Id)
+                    .HasColumnName("ID")
+                    .ValueGeneratedOnAdd();
 
                 entity.Property(e => e.Idclient)
                     .IsRequired()
@@ -69,6 +70,12 @@ namespace Tirelire_Jamal.Data
                     .IsUnicode(false);
 
                 entity.Property(e => e.Idproduit).HasColumnName("IDProduit");
+
+                entity.HasOne(d => d.IdNavigation)
+                    .WithOne(p => p.Avis)
+                    .HasForeignKey<Avis>(d => d.Id)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Avis_Commande");
 
                 entity.HasOne(d => d.IdclientNavigation)
                     .WithMany(p => p.Avis)
@@ -93,8 +100,10 @@ namespace Tirelire_Jamal.Data
                     .IsUnicode(false);
 
                 entity.Property(e => e.DateNaissance)
+                    .IsRequired()
                     .HasColumnName("Date_Naissance")
-                    .HasColumnType("date");
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Email)
                     .HasMaxLength(50)
@@ -127,7 +136,9 @@ namespace Tirelire_Jamal.Data
             {
                 entity.HasIndex(e => e.Idclient);
 
-                entity.Property(e => e.Id).HasColumnName("ID");
+                entity.Property(e => e.Id)
+                    .HasColumnName("ID")
+                    .ValueGeneratedNever();
 
                 entity.Property(e => e.Commentaire)
                     .IsRequired()
