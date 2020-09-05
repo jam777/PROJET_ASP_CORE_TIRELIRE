@@ -11,8 +11,8 @@ using System;
 using Tirelire_Jamal.Data;
 using Tirelire_Jamal.Models;
 using Tirelire_Jamal.Repository;
-using Tirelire_Jamal.Services;
 using Tirelire_Jamal.Session;
+using Tirelire_Jamal.Calculs;
 
 namespace Tirelire_Jamal
 {
@@ -56,6 +56,8 @@ namespace Tirelire_Jamal
                 .AddEntityFrameworkStores<Tirelire_JamContext>();
 
             services.AddScoped<ISessionTirelire, SessionTirelire>();
+
+            services.AddScoped<ICalcul, Calcul>();
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 

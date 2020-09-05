@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Tirelire_Jamal.Data;
-using Tirelire_Jamal.Services;
 using Tirelire_Jamal.Repository;
 using Tirelire_Jamal.Models;
 using Microsoft.AspNetCore.Http;
@@ -19,6 +18,7 @@ using System.Text.Json;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Authorization;
 using Tirelire_Jamal.Session;
+using Tirelire_Jamal.ViewModels;
 
 namespace Tirelire_Jamal.Controllers
 {
@@ -67,7 +67,7 @@ namespace Tirelire_Jamal.Controllers
             prodsColor.Remove(prod);
 
             //Passons 2 models a la vue
-            var modelVue = new DetailColor()
+            var modelVue = new DetailColorViewModel()
             {
                 produit = prod,
                 colorProduit = prodsColor

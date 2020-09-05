@@ -1,8 +1,12 @@
 ﻿@model Tirelire_Jamal.Models.Client
+@inject Tirelire_Jamal.Calculs.ICalcul calcul
 
 @{
     ViewData["Title"] = "Commande";
+
 }
+
+
 
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
@@ -35,8 +39,6 @@
             </div>
         </div>
 
-
-
         <table class="commande w-100">
             <thead class="thead-light">
                 <tr>
@@ -51,6 +53,7 @@
                 </tr>
             </thead>
             <tbody>
+                @{ double Total = 0;}
                 @foreach (var detail in cmde.DetailCommande)
                 {
                     <tr>
@@ -58,8 +61,8 @@
                         }
 
                         @foreach (var item in (ViewBag.prods as List
-             <Produit>
-                 ))
+<Produit>
+    ))
                         {
                             if (detail.Idproduit == item.Id)
                             {
@@ -74,13 +77,14 @@
                         <td>@prod.Hauteur x @prod.Longueur x @prod.Largeur</td>
                         <td>@prod.Poids kg</td>
                         <td>@prod.Frais kg/€</td>
-                        <td>115€</td>
+                        <td class="font-weight-bold">@calcul.ssTotal(detail) €</td>
                     </tr>
-                }
+                    Total += calcul.ssTotal(detail);
+                }@*Foreach detail*@
                 <tr>
                     <th>Total</th>
                     <td colspan="6"></td>
-                    <td>23 €</td>
+                    <td class="font-weight-bold text-danger">@Total €</td>
                 </tr>
                 <tr>
                     <th>Commentaire</th>

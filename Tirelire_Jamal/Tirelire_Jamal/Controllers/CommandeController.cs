@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Tirelire_Jamal.Models;
 using Tirelire_Jamal.Repository;
-using Tirelire_Jamal.Services;
 using Tirelire_Jamal.Session;
 
 namespace Tirelire_Jamal.Controllers
