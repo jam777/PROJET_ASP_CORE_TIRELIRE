@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "rJsxOQYP70JIwlY9Jnm78qJmJEEgdhmMJ6+u3OxV5PHIUisSM3fi43/W2+ubhN9bmbBLjhBhsVeOD+44C9u/1Q==",
+  "dgSpecHash": "y++cv8U7W95v8xPWWZcRv/OQtCX3SnkkGu/lwBJOhScBLhz2lTE1j3yB4ZSZe1/tXbviUe74pnvAa+zua0Z6nw==",
   "success": true,
   "projectFilePath": "C:\\Users\\jamel\\Desktop\\Tirelire_Jam_ASP\\Tirelire_Jamal\\Testtirelire\\Testtirelire.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\jamel\\.nuget\\packages\\bundlerminifier.core\\3.2.449\\bundlerminifier.core.3.2.449.nupkg.sha512",
     "C:\\Users\\jamel\\.nuget\\packages\\microsoft.aspnetcore.diagnostics.entityframeworkcore\\3.1.7\\microsoft.aspnetcore.diagnostics.entityframeworkcore.3.1.7.nupkg.sha512",
     "C:\\Users\\jamel\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\3.1.7\\microsoft.aspnetcore.jsonpatch.3.1.7.nupkg.sha512",
     "C:\\Users\\jamel\\.nuget\\packages\\microsoft.aspnetcore.mvc.newtonsoftjson\\3.1.7\\microsoft.aspnetcore.mvc.newtonsoftjson.3.1.7.nupkg.sha512",
@@ -27,6 +28,7 @@
     "C:\\Users\\jamel\\.nuget\\packages\\microsoft.extensions.primitives\\3.1.7\\microsoft.extensions.primitives.3.1.7.nupkg.sha512",
     "C:\\Users\\jamel\\.nuget\\packages\\newtonsoft.json\\12.0.2\\newtonsoft.json.12.0.2.nupkg.sha512",
     "C:\\Users\\jamel\\.nuget\\packages\\newtonsoft.json.bson\\1.0.2\\newtonsoft.json.bson.1.0.2.nupkg.sha512",
+    "C:\\Users\\jamel\\.nuget\\packages\\nuglify\\1.5.14\\nuglify.1.5.14.nupkg.sha512",
     "C:\\Users\\jamel\\.nuget\\packages\\system.collections.immutable\\1.7.1\\system.collections.immutable.1.7.1.nupkg.sha512",
     "C:\\Users\\jamel\\.nuget\\packages\\system.componentmodel.annotations\\4.7.0\\system.componentmodel.annotations.4.7.0.nupkg.sha512",
     "C:\\Users\\jamel\\.nuget\\packages\\system.diagnostics.diagnosticsource\\4.7.1\\system.diagnostics.diagnosticsource.4.7.1.nupkg.sha512"

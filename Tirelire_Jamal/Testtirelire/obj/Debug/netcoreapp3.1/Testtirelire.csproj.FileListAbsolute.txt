@@ -34,4 +34,3 @@ C:\Users\jamel\Desktop\Tirelire_Jam_ASP\Tirelire_Jamal\Testtirelire\bin\Debug\ne
 C:\Users\jamel\Desktop\Tirelire_Jam_ASP\Tirelire_Jamal\Testtirelire\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Primitives.dll
 C:\Users\jamel\Desktop\Tirelire_Jam_ASP\Tirelire_Jamal\Testtirelire\bin\Debug\netcoreapp3.1\System.Collections.Immutable.dll
 C:\Users\jamel\Desktop\Tirelire_Jam_ASP\Tirelire_Jamal\Testtirelire\bin\Debug\netcoreapp3.1\System.Diagnostics.DiagnosticSource.dll
-C:\Users\jamel\Desktop\Tirelire_Jam_ASP\Tirelire_Jamal\Testtirelire\obj\Debug\netcoreapp3.1\Testtirelire.csproj.CoreCompileInputs.cache

@@ -68,17 +68,15 @@
                     </table>
 
                     @*Description*@
-                    <div class="descriptionDetail">
-                        <div class="titre_visiteur mx-2 d-flex justify-content-between mb-3">
+                    <div class="descriptionDetail ">
+                        <div class="titre_visiteur  mx-2 d-flex justify-content-between mb-3">
                             <div class="titre">
-                                <a class="" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                <a class="slide down" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                                     <span>Description</span>
                                 </a>
-                            </div>
-                        </div>
-                        <div class="collapse  mb-5" id="collapseExample">
-                            <div class="card card-body">
-                                @Model.produit.Description
+                                <div id="texteSlide" class="text-black-50">
+                                    @Model.produit.Description
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -126,6 +124,7 @@
 @section scripts
 {
     <script src="~/js/Detail.js"></script>
+    <script src="~/js/Slide.js"></script>
 
 }
 
