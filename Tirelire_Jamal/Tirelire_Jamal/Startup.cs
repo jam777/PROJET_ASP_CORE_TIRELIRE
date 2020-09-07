@@ -13,6 +13,8 @@ using Tirelire_Jamal.Models;
 using Tirelire_Jamal.Repository;
 using Tirelire_Jamal.Session;
 using Tirelire_Jamal.Calculs;
+using Tirelire_Jamal.Services;
+
 
 namespace Tirelire_Jamal
 {
@@ -60,8 +62,6 @@ namespace Tirelire_Jamal
             services.AddScoped<ICalcul, Calcul>();
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-
-            /* services.AddHttpContextAccessor();*/
 
             services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
 

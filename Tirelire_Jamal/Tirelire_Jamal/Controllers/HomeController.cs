@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
@@ -19,6 +18,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Authorization;
 using Tirelire_Jamal.Session;
 using Tirelire_Jamal.ViewModels;
+using Tirelire_Jamal.Services;
+
 
 namespace Tirelire_Jamal.Controllers
 {
@@ -28,10 +29,14 @@ namespace Tirelire_Jamal.Controllers
         private IRepository<Produit> _repo;
         private ISessionTirelire _session;
 
-        public HomeController(IRepository<Produit> repo, ISessionTirelire session)
+        public HomeController(IRepository<Produit> repo,
+            ISessionTirelire session,
+            PaginatedList<Produit> pagination = null
+            )
         {
             _repo = repo;
             _session = session;
+
         }
 
         /// <summary>
@@ -39,15 +44,20 @@ namespace Tirelire_Jamal.Controllers
         /// </summary>
         /// <returns>Vue avec collection de produits</returns>
 
-        public IActionResult Index()
+        public IActionResult Index(int? pageNumber)
         {
             //Récupère tous les produits
-            var prods = _repo.FindAll();
+            var prods = _repo.FindAll().AsQueryable();
+
+            //Pagination
 
             ViewBag.Titre = "Liste des articles";
             ViewBag.totalPanier = _session.totalPanier();
 
-            return View(prods);
+            int pageSize = 6;
+            return View(PaginatedList<Produit>.Create(prods, pageNumber ?? 1, pageSize));
+
+
         }
 
         /// <summary>

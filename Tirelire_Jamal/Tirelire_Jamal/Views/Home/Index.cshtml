@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Tirelire_Jamal.Models.Produit>
+﻿@model Tirelire_Jamal.Services.PaginatedList<Produit>
 
 
 @{
@@ -26,7 +26,7 @@
 </div>
 
 <div class="pagination row justify-content-center">
-    @Html.Partial("_pagination");
+    @Html.Partial("_pagination", Model)
 </div>
 
 
