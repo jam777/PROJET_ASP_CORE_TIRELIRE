@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Tirelire_Jamal.Data;
 using Tirelire_Jamal.Models;
 using Tirelire_Jamal.Repository;
@@ -73,6 +74,7 @@ namespace Tirelire_Jamal.Controllers
             return View();
         }
 
+        [HttpGet]
         public IActionResult Register()
         {
             ViewBag.totalPanier = _session.totalPanier();
@@ -97,6 +99,9 @@ namespace Tirelire_Jamal.Controllers
 
 
                 var IdAdresseRegister = _repoAd.FindAll().Where(p => p.AdFacturation == registerModel.AdresseFacturation).Select(p => p.Id).FirstOrDefault();
+
+
+
 
                 Client clientUser = new Client()
                 {
@@ -151,10 +156,10 @@ namespace Tirelire_Jamal.Controllers
                 }
             }
 
-
             ViewBag.totalPanier = _session.totalPanier();
-            ViewBag.modelState = ModelState;
-            return View();
+            ViewBag.validChp = ModelState.ToDictionary(k => k.Key, k => k.Value.ValidationState.ToString());
+
+            return View(registerModel);
         }
 
 

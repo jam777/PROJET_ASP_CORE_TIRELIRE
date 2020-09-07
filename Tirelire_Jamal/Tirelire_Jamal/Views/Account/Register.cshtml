@@ -1,5 +1,12 @@
 ﻿@model Tirelire_Jamal.ViewModels.RegisterViewModel
 
+@functions {
+    public string validChp(string chp, string value)
+    {
+        return (Model != null && ViewBag.validChp[chp] == "Valid") ? value : "";
+    }
+}
+
 
 <div class="row justify-content-center">
 
@@ -16,13 +23,13 @@
 
                     <div class="col form-group px-0">
                         <label>UserName</label>
-                        <input type="text" name="UserName" class="form-control" placeholder="" value=>
+                        <input type="text" name="UserName" class="form-control" placeholder="" value=@((Model!=null)? validChp("UserName",Model.UserName) : "")>
                         @Html.ValidationMessageFor(x => x.UserName, "", new { @class = "text-danger" })
                     </div> <!-- form-group end.// -->
                     @*PASSWORD*@
                     <div class="col form-group px-0">
                         <label>Mot de Passe</label>
-                        <input type="text" name="Password" class="form-control" placeholder=" ">
+                        <input type="text" name="Password" class="form-control" placeholder="" value=@((Model!=null)? validChp("Password",Model.Password) : "")>
                         @Html.ValidationMessageFor(x => x.Password, "", new { @class = "text-danger" })
 
                     </div> <!-- form-row end.// -->
@@ -31,14 +38,15 @@
                         @*PRENOM*@
                         <div class="col form-group">
                             <label>Prenom</label>
-                            <input type="text" name="Prenom" class="form-control" placeholder="">
+                            <input type="text" name="Prenom" class="form-control" placeholder="" value=@((Model!=null)? validChp("Prenom",Model.Prenom) : "")>
                             @Html.ValidationMessageFor(x => x.Prenom, "", new { @class = "text-danger" })
 
                         </div> <!-- form-group end.// -->
                         @*NOM*@
                         <div class="col form-group">
                             <label>Nom</label>
-                            <input type="text" name="Nom" class="form-control" placeholder=" ">
+
+                            <input type="text" name="Nom" class="form-control" placeholder=" " value=@((Model!=null)? validChp("Nom",Model.Nom) : "")>
                             @Html.ValidationMessageFor(x => x.Nom, "", new { @class = "text-danger" })
 
                         </div> <!-- form-group end.// -->
@@ -47,7 +55,7 @@
                     <div class="form-group">
                         @*EMAIL*@
                         <label>Adresse Email</label>
-                        <input type="text" name="Email" class="form-control" placeholder="">
+                        <input type="text" name="Email" class="form-control" placeholder="" value=@((Model!=null)? validChp("Email",Model.Email) : "")>
                         @Html.ValidationMessageFor(x => x.Email, "", new { @class = "text-danger" })
 
                     </div> <!-- form-group end.// -->
@@ -56,16 +64,25 @@
                         @*BIRTHDAY*@
                         <div class="form-group col-md-6">
                             <label>Date de Naissance</label>
-                            <input type="date" name="DateNaissance " class="form-control">
+                            <input type="date" name="DateNaissance" class="form-control" value=@((Model!=null)? validChp("DateNaissance",Model.DateNaissance) : "")>
                             @Html.ValidationMessageFor(x => x.DateNaissance, "", new { @class = "text-danger" })
 
                         </div> <!-- form-group end.// -->
                         @*GENRE*@
                         <div class="form-group col-md-6">
                             <label>Genre</label>
+
+                            @{
+                                var h = (Model != null && Model.Genre == true) ? "selected" : "";
+                                var f = (Model != null && Model.Genre == false) ? "selected" : "";
+                                var r = (Model != null && Model.Genre);
+                            }
                             <select id="inputState" name="Genre" class="form-control">
-                                <option value="true">Homme</option>
-                                <option value="false">Femme</option>
+
+                                <!option value="true" @h>Homme</!option>
+                                <!option value="false" @f>Femme</!option>
+
+
                             </select>
                             @Html.ValidationMessageFor(x => x.Genre, "", new { @class = "text-danger" })
 
@@ -75,23 +92,21 @@
                     @*TELEPHONE*@
                     <div class="form-group">
                         <label>Téléphone</label>
-                        <input type="text" id="phone" name="Telephone" class="form-control">
+                        <input type="text" id="phone" name="Telephone" placeholder="01-02-03-04-05" class="form-control" value=@((Model!=null)? validChp("Telephone",Model.Telephone) : "" )>
                         @Html.ValidationMessageFor(x => x.Telephone, "", new { @class = "text-danger" })
-
-                        <small>Format: 01-23-45-67-89</small>
 
                     </div> <!-- form-group end.// -->
                     @*Adresse de Livraison*@
                     <div class="col form-group px-0">
                         <label>Adresse de Livraison</label>
-                        <textarea name="AdresseLivraison" class="form-control" placeholder=""></textarea>
+                        <textarea name="AdresseLivraison" class="form-control" placeholder="">@((Model!=null)? validChp("AdresseLivraison", Model.AdresseLivraison) : "")</textarea>
                         @Html.ValidationMessageFor(x => x.AdresseLivraison, "", new { @class = "text-danger" })
 
                     </div> <!-- form-group end.// -->
                     @*Adresse de Facturation*@
                     <div class="col form-group px-0">
                         <label>Adresse de Facturation</label>
-                        <textarea name="AdresseFacturation" class="form-control" placeholder=" "></textarea>
+                        <textarea name="AdresseFacturation" class="form-control" placeholder=" ">@((Model!=null)? validChp("AdresseFacturation", Model.AdresseFacturation) : "")</textarea>
                         @Html.ValidationMessageFor(x => x.AdresseFacturation, "", new { @class = "text-danger" })
 
                     </div> <!-- form-group end.// -->

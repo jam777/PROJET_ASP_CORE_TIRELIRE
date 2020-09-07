@@ -26,6 +26,7 @@ namespace Tirelire_Jamal.ViewModels
         [Required(ErrorMessage = "Veuillez entrer une date de naissance")]
         public string DateNaissance { get; set; }
 
+        [RegularExpression(@"([0-9]{2}-){4}[0-9]{2}", ErrorMessage = "Votre téléphone doit avoir ce format : 01-02-03-04-05")]
         [Required(ErrorMessage = "Veuillez entrer un Numéro de téléphone")]
         public string Telephone { get; set; }
 
