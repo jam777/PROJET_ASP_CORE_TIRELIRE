@@ -169,8 +169,6 @@ namespace Tirelire_Jamal.Controllers
                     session.SetString("Panier", jsonPanier);
                 }
             }
-
-
             return RedirectToAction("DetailPanier", "Panier");
         }
 
@@ -202,7 +200,6 @@ namespace Tirelire_Jamal.Controllers
 
                 ViewBag.ssTotaux = ssTotaux.ToArray();
                 ViewBag.Total = Total;
-
             }
             else
             {
@@ -213,7 +210,8 @@ namespace Tirelire_Jamal.Controllers
 
 
         /// <summary>
-        /// 
+        /// Ajax en modifiant la quantite je recalcule les prix
+        /// et je mets a jours la session
         /// </summary>
         /// <param name="id"></param>
         /// <param name="quantite"></param>

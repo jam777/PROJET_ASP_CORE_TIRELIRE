@@ -150,7 +150,10 @@ namespace Tirelire_Jamal.Controllers
                     }
                 }
             }
+
+
             ViewBag.totalPanier = _session.totalPanier();
+            ViewBag.modelState = ModelState;
             return View();
         }
 

@@ -1,9 +1,11 @@
 ﻿@model Tirelire_Jamal.ViewModels.RegisterViewModel
-<div class="row justify-content-center">   
+
+
+<div class="row justify-content-center">
 
     <div class="col-md-6">
         <div class="card">
-            <header class="card-header">               
+            <header class="card-header">
                 <h4 class="card-title mt-2 text-center">Inscription</h4>
             </header>
 
@@ -11,15 +13,18 @@
                 <form method="post">
 
                     @*USERNAME*@
+
                     <div class="col form-group px-0">
                         <label>UserName</label>
-                        <input type="text" name="UserName" class="form-control" placeholder="">
+                        <input type="text" name="UserName" class="form-control" placeholder="" value=>
+                        @Html.ValidationMessageFor(x => x.UserName, "", new { @class = "text-danger" })
                     </div> <!-- form-group end.// -->
                     @*PASSWORD*@
                     <div class="col form-group px-0">
                         <label>Mot de Passe</label>
-                        <input type="password" name="Password" class="form-control" placeholder=" ">
-                        @Html.ValidationSummary("", new { @class = "text-danger" })
+                        <input type="text" name="Password" class="form-control" placeholder=" ">
+                        @Html.ValidationMessageFor(x => x.Password, "", new { @class = "text-danger" })
+
                     </div> <!-- form-row end.// -->
 
                     <div class="form-row">
@@ -27,11 +32,15 @@
                         <div class="col form-group">
                             <label>Prenom</label>
                             <input type="text" name="Prenom" class="form-control" placeholder="">
+                            @Html.ValidationMessageFor(x => x.Prenom, "", new { @class = "text-danger" })
+
                         </div> <!-- form-group end.// -->
                         @*NOM*@
                         <div class="col form-group">
                             <label>Nom</label>
                             <input type="text" name="Nom" class="form-control" placeholder=" ">
+                            @Html.ValidationMessageFor(x => x.Nom, "", new { @class = "text-danger" })
+
                         </div> <!-- form-group end.// -->
                     </div> <!-- form-row end.// -->
 
@@ -39,13 +48,17 @@
                         @*EMAIL*@
                         <label>Adresse Email</label>
                         <input type="text" name="Email" class="form-control" placeholder="">
-                    </div> <!-- form-group end.// -->                    
+                        @Html.ValidationMessageFor(x => x.Email, "", new { @class = "text-danger" })
+
+                    </div> <!-- form-group end.// -->
 
                     <div class="form-row">
                         @*BIRTHDAY*@
                         <div class="form-group col-md-6">
                             <label>Date de Naissance</label>
                             <input type="date" name="DateNaissance " class="form-control">
+                            @Html.ValidationMessageFor(x => x.DateNaissance, "", new { @class = "text-danger" })
+
                         </div> <!-- form-group end.// -->
                         @*GENRE*@
                         <div class="form-group col-md-6">
@@ -54,26 +67,33 @@
                                 <option value="true">Homme</option>
                                 <option value="false">Femme</option>
                             </select>
+                            @Html.ValidationMessageFor(x => x.Genre, "", new { @class = "text-danger" })
+
                         </div> <!-- form-group end.// -->
+
                     </div> <!-- form-row.// -->
                     @*TELEPHONE*@
                     <div class="form-group">
                         <label>Téléphone</label>
-                        <input type="tel" id="phone" name="Telephone" class="form-control"
-                               pattern="[0-9]{2}-[0-9]{2}-[0-9]{2}-[0-9]{2}-[0-9]{2}"
-                               required>
+                        <input type="text" id="phone" name="Telephone" class="form-control">
+                        @Html.ValidationMessageFor(x => x.Telephone, "", new { @class = "text-danger" })
 
                         <small>Format: 01-23-45-67-89</small>
+
                     </div> <!-- form-group end.// -->
                     @*Adresse de Livraison*@
                     <div class="col form-group px-0">
                         <label>Adresse de Livraison</label>
                         <textarea name="AdresseLivraison" class="form-control" placeholder=""></textarea>
+                        @Html.ValidationMessageFor(x => x.AdresseLivraison, "", new { @class = "text-danger" })
+
                     </div> <!-- form-group end.// -->
                     @*Adresse de Facturation*@
                     <div class="col form-group px-0">
                         <label>Adresse de Facturation</label>
                         <textarea name="AdresseFacturation" class="form-control" placeholder=" "></textarea>
+                        @Html.ValidationMessageFor(x => x.AdresseFacturation, "", new { @class = "text-danger" })
+
                     </div> <!-- form-group end.// -->
 
                     <div class="form-group">

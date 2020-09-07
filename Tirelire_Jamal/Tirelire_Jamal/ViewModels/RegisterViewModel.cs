@@ -1,20 +1,40 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Serialization;
 
 namespace Tirelire_Jamal.ViewModels
 {
     public class RegisterViewModel : LoginViewModel
     {
-
+        [StringLength(12, ErrorMessage = "Le Username est compris entre 3 et {1} caractères", MinimumLength = 3)]
+        [Required(ErrorMessage = "Veuillez entrer un Username")]
         public string UserName { get; set; }
+
+        [Required(ErrorMessage = "Veuillez entrer un Nom")]
         public string Nom { get; set; }
+
+        [Required(ErrorMessage = "Veuillez entrer un Prénom")]
         public string Prenom { get; set; }
+
+        [EmailAddress]
+        [Required(ErrorMessage = "Veuillez entrer un Email")]
+        public new string Email { get; set; }
+
+        [Required(ErrorMessage = "Veuillez entrer une date de naissance")]
         public string DateNaissance { get; set; }
+
+        [Required(ErrorMessage = "Veuillez entrer un Numéro de téléphone")]
         public string Telephone { get; set; }
+
         public bool Genre { get; set; }
+
+        [Required(ErrorMessage = "Veuillez entrer une adresse de livraison")]
         public string AdresseLivraison { get; set; }
+
+        [Required(ErrorMessage = "Veuillez entrer une adresse de facturation")]
         public string AdresseFacturation { get; set; }
         public string RoleName { get; set; }
     }
