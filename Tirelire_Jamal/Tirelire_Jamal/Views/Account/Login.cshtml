@@ -1,16 +1,24 @@
 ﻿@model Tirelire_Jamal.ViewModels.LoginViewModel
 
-
 <div class="row justify-content-center">
     <div class="col-md-6">
         <div class="card">
             <header class="card-header mb-2">
                 <h4 class="card-title mt-2 text-center">Se Connecter</h4>
             </header>
-            @Html.ValidationSummary("", new { @class = "text-danger" })
             <article class="card-body pt-0">
-                <form method="post">
 
+                @foreach (var item in ViewContext.ViewData.ModelState)
+                {
+                    if (item.Key == "login")
+                    {
+                        var error = item.Value.Errors.FirstOrDefault().ErrorMessage.ToString();
+                        <p class="text-danger text-center font-weight-bold mt-3"> @error</p>
+                        break;
+                    }
+                }
+
+                <form method="post">
                     @*EMAIL*@
                     <div class="form-group mb-0">
                         <label class="font-weight-bold">Adresse Email</label>

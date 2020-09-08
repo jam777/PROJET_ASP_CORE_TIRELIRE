@@ -64,12 +64,15 @@ namespace Tirelire_Jamal.Controllers
                     {
                         return RedirectToAction("Index", "Home");
                     }
+                    else
+                    {
+                        ModelState.AddModelError("login", "Votre email ou votre mot de passe est incorrect");
+                    }
+
                 }
-                else
-                {
-                    ModelState.AddModelError("", "Email ou Mot de Passe Invalide");
-                }
+
             }
+
             ViewBag.totalPanier = _session.totalPanier();
             return View();
         }
