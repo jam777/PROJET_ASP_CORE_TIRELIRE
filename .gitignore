@@ -38,3 +38,8 @@ msbuild.wrn
 
 #Chaine connection
 /appsettings.json
+
+DesignTimeBuild/
+config/
+v16/
+obj/

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\jamel\\Desktop\\Tirelire_Jam_Pagination\\Tirelire_Jamal\\Testtirelire\\Testtirelire.csproj": {}
+    "C:\\Users\\jamel\\Desktop\\Tirelire_Jam_ASP\\Tirelire_Jamal\\Testtirelire\\Testtirelire.csproj": {}
   },
   "projects": {
-    "C:\\Users\\jamel\\Desktop\\Tirelire_Jam_Pagination\\Tirelire_Jamal\\Testtirelire\\Testtirelire.csproj": {
+    "C:\\Users\\jamel\\Desktop\\Tirelire_Jam_ASP\\Tirelire_Jamal\\Testtirelire\\Testtirelire.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\jamel\\Desktop\\Tirelire_Jam_Pagination\\Tirelire_Jamal\\Testtirelire\\Testtirelire.csproj",
+        "projectUniqueName": "C:\\Users\\jamel\\Desktop\\Tirelire_Jam_ASP\\Tirelire_Jamal\\Testtirelire\\Testtirelire.csproj",
         "projectName": "Testtirelire",
-        "projectPath": "C:\\Users\\jamel\\Desktop\\Tirelire_Jam_Pagination\\Tirelire_Jamal\\Testtirelire\\Testtirelire.csproj",
+        "projectPath": "C:\\Users\\jamel\\Desktop\\Tirelire_Jam_ASP\\Tirelire_Jamal\\Testtirelire\\Testtirelire.csproj",
         "packagesPath": "C:\\Users\\jamel\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\jamel\\Desktop\\Tirelire_Jam_Pagination\\Tirelire_Jamal\\Testtirelire\\obj\\",
+        "outputPath": "C:\\Users\\jamel\\Desktop\\Tirelire_Jam_ASP\\Tirelire_Jamal\\Testtirelire\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\jamel\\AppData\\Roaming\\NuGet\\NuGet.Config",

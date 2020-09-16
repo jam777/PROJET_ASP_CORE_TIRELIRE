@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "dyKPW2YeQ56fcZ/iCyBK+WgtU5/uwdlYbL59i4P+FNTtzTy81RWy2YYrvQXuSgEQK0vSal+GDlp5tZz3r0i56g==",
+  "dgSpecHash": "arEehvGfpV/h/H8OHAnwSo9aKq9npRbQTrTDsIeM9AEaemtPIwe4FFr4LtT+Bw+mHdiNuBRXCmdiZ9Il2sK1uA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\jamel\\Desktop\\Tirelire_Jam_Pagination\\Tirelire_Jamal\\Tirelire_Jamal\\Tirelire_Jamal.csproj",
+  "projectFilePath": "C:\\Users\\jamel\\Desktop\\Tirelire_Jam_ASP\\Tirelire_Jamal\\Tirelire_Jamal\\Tirelire_Jamal.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\jamel\\.nuget\\packages\\buildbundlerminifier\\3.2.449\\buildbundlerminifier.3.2.449.nupkg.sha512",
     "C:\\Users\\jamel\\.nuget\\packages\\bundlerminifier.core\\3.2.449\\bundlerminifier.core.3.2.449.nupkg.sha512",

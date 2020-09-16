@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "YIMZXE+M+XKK4gXfpER2gvy0QF5MIH8+r08+xm8GG0X9DCfTTLagN1IF9/Mgbo62kpTtUiM6CaHNCMbh5MTjTg==",
+  "dgSpecHash": "o7oEhcMWUB3QHg11CSNxDPnBCM951KtmS2dsn1US3z+rTF9WgrbUVzq/5sdc7D1xPSIP5dDijEvWr7hFT1PxCQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\jamel\\Desktop\\Tirelire_Jam_Pagination\\Tirelire_Jamal\\Testtirelire\\Testtirelire.csproj",
+  "projectFilePath": "C:\\Users\\jamel\\Desktop\\Tirelire_Jam_ASP\\Tirelire_Jamal\\Testtirelire\\Testtirelire.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\jamel\\.nuget\\packages\\bundlerminifier.core\\3.2.449\\bundlerminifier.core.3.2.449.nupkg.sha512",
     "C:\\Users\\jamel\\.nuget\\packages\\microsoft.aspnetcore.diagnostics.entityframeworkcore\\3.1.7\\microsoft.aspnetcore.diagnostics.entityframeworkcore.3.1.7.nupkg.sha512",
