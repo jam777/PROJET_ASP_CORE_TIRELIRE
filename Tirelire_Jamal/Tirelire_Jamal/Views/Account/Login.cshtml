@@ -1,0 +1,54 @@
+﻿@model Tirelire_Jamal.ViewModels.LoginViewModel
+
+<style>
+    .login {
+        height: 100vh !important;
+    }
+</style>
+
+<div class="login row m-0 align-items-center justify-content-center">
+    <div class="col-md-6 ">
+        <div class="card">
+            <header class="card-header mb-2">
+                <h4 class="card-title mt-2 text-center">Se Connecter</h4>
+            </header>
+            <article class="card-body pt-0">
+
+                @foreach (var item in ViewContext.ViewData.ModelState)
+                {
+                    if (item.Key == "login")
+                    {
+                        var error = item.Value.Errors.FirstOrDefault().ErrorMessage.ToString();
+                        <p class="text-danger text-center font-weight-bold mt-3"> @error</p>
+                        break;
+                    }
+                }
+
+                <form method="post">
+                    @*EMAIL*@
+                    <div class="form-group mb-0">
+                        <label class="font-weight-bold">Adresse Email : bob@bob</label>
+                        <input type="text" name="Email" class="form-control" placeholder="">
+                    </div> <!-- form-group end.// -->
+                    @Html.ValidationMessageFor(x => x.Email, "", new { @class = "text-danger" })
+
+                    @*PASSWORD*@
+                    <div class="form-group mb-0 mt-2">
+                        <label class="font-weight-bold mt-4">Password : Bob777%L</label>
+                        <input class="form-control" name="Password" type="password">
+                    </div> <!-- form-group end.// -->
+                    @Html.ValidationMessageFor(x => x.Password, "", new { @class = "text-danger" })
+
+
+                    @*SUBMIT*@
+                    <div class="form-group mt-4">
+                        <button type="submit" class="btn btn-primary btn-block">Se Connecter</button>
+                    </div> <!-- form-group// -->
+
+                </form>
+            </article> <!-- card-body end .// -->
+            <div class="border-top card-body text-center">Pas de Compte ?<a href=@Url.Action("Register","Account")>Inscrivez-vous</a></div>
+        </div> <!-- card.// -->
+    </div> <!-- col.//-->
+
+</div>

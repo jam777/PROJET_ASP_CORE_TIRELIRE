@@ -1,0 +1,139 @@
+﻿@model Tirelire_Jamal.ViewModels.DetailColorViewModel;
+@{
+    ViewData["Title"] = "Detail";
+
+}
+
+<span id="statusPanier">@ViewBag.statusAjoutPanier</span>
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item active" aria-current="page">
+            @Html.ActionLink("Accueil", "Index")
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">
+            Détail
+        </li>
+    </ol>
+</nav>
+
+
+
+@*DETAIL*@
+<div class="detail row justify-content-center mx-0">
+    @*CARD*@
+    <div class="card mb-3 col-md-8">
+        <div class="titre_visiteur mx-2 d-flex justify-content-between mb-3">
+            <div class="titre">
+                Détail de l'article
+            </div>
+        </div>
+        <div class="row justify-content-center no-gutters">
+            @*IMAGE et MODAL*@
+            <div class="d-flex  py-4 col-sm-5 mb-3 ">
+                @*IMAGE*@
+                <a data-toggle="modal" data-target="#exampleModalCenter" class="hoverImg m-auto">
+
+                    <img src=@Model.produit.Image class="imgCard card-img d-block" alt="imgProduit">
+                    <div class="hoverImgBack"></div>
+                    <div class="hoverDetail">Agrandir</div>
+                </a>
+                @*MODAL IMAGE*@
+                @Html.Partial("_modalDetail", Model.produit)
+            </div>
+
+            <div class="info-panier col-sm-7 mb-3 ">
+
+                @*AJOUT PANIER*@
+                <div class="card-body m-0 ">
+
+                    @*TITRE*@
+                    <h4 class="card-title">@Model.produit.Nom</h4>
+
+                    @*INFO*@
+                    <table class="table table-responsive-sm">
+                        <thead>
+                            <tr>
+                                <th scope="col">LxHxL(cm)</th>
+                                <th scope="col">Poids</th>
+                                <th scope="col">Frais</th>
+                                <th scope="col">Prix</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="long"> @(Model.produit.Longueur)X@(Model.produit.Hauteur)X@(Model.produit.Largeur)</</td>
+                                <td class="poids">@Model.produit.Poids kg</td>
+                                <td class="frais">@Model.produit.Frais€/kg</td>
+                                <td class="prix">@Model.produit.Prix€</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    @*Description*@
+                    <div class="descriptionDetail ">
+                        <div class="titre_visiteur  mx-2 d-flex justify-content-between mb-3">
+                            <div class="titre">
+                                <a class="slide down" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                    <span>Description</span>
+                                </a>
+                                <div id="texteSlide">
+                                    @Model.produit.Description
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    @{
+                        int valeur;
+                        valeur = (ViewBag.quantitePanier != 0) ? ViewBag.quantitePanier : 1;
+                    }
+
+                    @*FORMULAIRE AJOUT PANIER*@
+                    <form id="formAjouter" action=@Url.Action("Ajouter", "Panier", new { id = Model.produit.Id }) method="post">
+                        <div class="form-group">
+                            <select class="custom-select w-100 text-center" name="quantite">
+                                <option selected value="@valeur">@valeur</option>
+                                @for (int i = 1; i <= 10; i++)
+                                {
+                                    if (i == valeur)
+                                    {
+                                        continue;
+                                    }
+                                    <option value="@i" class="text-center">@i</option>
+                                }
+                            </select>
+                            <button type="submit" id="ajouterPanier" class="btn btn-info btn-lg mt-2 form-control" name="panier">Ajouter au Panier</button>
+                        </div>
+                    </form>
+                    @*MODAL PANIER*@
+                    @Html.Partial("_modalPanier", Model.produit)
+                </div>
+            </div>
+        </div>
+    </div>
+    @* MODAL IMAGE*@
+    <div class="container carousseDetail  col-md-4">
+        <div class="titre_visiteur mx-2 d-flex justify-content-between mb-3">
+            <div class="titre">
+                Article(s) de même couleur
+            </div>
+        </div>
+        @Html.Partial("_carrousel", Model.colorProduit)
+    </div>
+</div>
+
+
+
+
+@section scripts
+{
+    <script src="~/js/Detail.js"></script>
+    <script src="~/js/Slide.js"></script>
+
+}
+
+
+
+
+
