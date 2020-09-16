@@ -49,7 +49,7 @@ namespace Tirelire_Jamal.Controllers
         }
 
         /// <summary>
-        /// Authentification login
+        /// Authentification
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
@@ -134,9 +134,9 @@ namespace Tirelire_Jamal.Controllers
                     Active = true
                 };
 
-                var result = await _userManager.CreateAsync(clientUser, registerModel.Password);
-
-                if (result.Succeeded)
+                /*                var result = await _userManager.CreateAsync(clientUser, registerModel.Password);
+                */
+                if (/*result.Succeeded*/false)
                 {
 
                     bool roleExists = await _roleManager.RoleExistsAsync(registerModel.RoleName);
@@ -159,20 +159,21 @@ namespace Tirelire_Jamal.Controllers
                     var resultSignIn = await _signInManager.PasswordSignInAsync(registerModel.UserName, registerModel.Password, false, false);
                     if (resultSignIn.Succeeded)
                     {
-                        ViewBag.register = true;
                         return RedirectToAction("Index", "Home");
                     }
-
                 }
                 else
                 {
-                    _repoAd.Remove(_repoAd.FindOne(IdAdresseRegister));
+                    /* _repoAd.Remove(_repoAd.FindOne(IdAdresseRegister));*/
 
-                    foreach (var error in result.Errors)
+                    /*foreach (var error in result.Errors)
                     {
                         ModelState.AddModelError("ErrorPassword", error.Description);
-                    }
+                    }*/
 
+                    ViewBag.totalPanier = _session.totalPanier();
+                    ViewBag.message = "Vous n'avez pas les droits pour Commander";
+                    return View("_modalErreur");
                 }
             }
 

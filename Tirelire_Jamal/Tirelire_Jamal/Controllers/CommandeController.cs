@@ -11,7 +11,7 @@ using Tirelire_Jamal.Session;
 
 namespace Tirelire_Jamal.Controllers
 {
-    [Authorize(Roles = "Client")]
+    [Authorize(Roles = "Client,Admin")]
     public class CommandeController : Controller
     {
 
@@ -41,35 +41,43 @@ namespace Tirelire_Jamal.Controllers
             //Session
             var panierSession = _session.deserialise();
 
-
-            //Commande
-            cmd.Date = panierSession.Cmd.Date;
-            cmd.Idclient = _userManager.Users.First().Id;
-            cmd.Status = "Préparée";
-            //Les Détails Commandes
-            foreach (var detail in panierSession.Cmd.DetailCommande)
+            if (User.IsInRole("Admin"))
             {
-                cmd.DetailCommande.Add(
-                   detail
-                );
+                //Commande
+                cmd.Date = panierSession.Cmd.Date;
+                cmd.Idclient = _userManager.Users.First().Id;
+                cmd.Status = "Préparée";
+                //Les Détails Commandes
+                foreach (var detail in panierSession.Cmd.DetailCommande)
+                {
+                    cmd.DetailCommande.Add(
+                       detail
+                    );
+                }
+                _repoCmd.Create(cmd);
+
+                //AVIS
+
+                foreach (var detail in cmd.DetailCommande)
+                {
+                    Avis avis = new Avis();
+                    avis.Idcommande = cmd.Id;
+                    avis.Idclient = cmd.Idclient;
+                    avis.Idproduit = detail.Idproduit;
+                    avis.Valide = true;
+                    _repoAvis.Create(avis);
+                }
+
+                _session.clearSession();
+
+                return RedirectToAction("Cmde", "Commande");
             }
-            _repoCmd.Create(cmd);
-
-            //AVIS
-
-            foreach (var detail in cmd.DetailCommande)
+            else
             {
-                Avis avis = new Avis();
-                avis.Idcommande = cmd.Id;
-                avis.Idclient = cmd.Idclient;
-                avis.Idproduit = detail.Idproduit;
-                avis.Valide = true;
-                _repoAvis.Create(avis);
+                ViewBag.totalPanier = _session.totalPanier();
+                ViewBag.message = "Vous n'avez pas les droits pour Commander";
+                return View("_modalErreur");
             }
-
-            _session.clearSession();
-
-            return RedirectToAction("Cmde", "Commande");
         }
 
         /// <summary>
@@ -87,9 +95,5 @@ namespace Tirelire_Jamal.Controllers
 
             return View(user);
         }
-
     }
-
-
 }
-

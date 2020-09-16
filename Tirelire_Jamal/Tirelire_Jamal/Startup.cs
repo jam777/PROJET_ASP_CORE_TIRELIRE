@@ -45,9 +45,11 @@ namespace Tirelire_Jamal
                     options.SignIn.RequireConfirmedEmail = false;
                     options.SignIn.RequireConfirmedPhoneNumber = false;
                     options.SignIn.RequireConfirmedAccount = false;
-                    options.Password.RequireDigit = false;
-                    options.Password.RequireNonAlphanumeric = false;
-                    options.Password.RequireUppercase = false;
+                    options.Password.RequiredLength = 5;
+                    options.Password.RequiredUniqueChars = 3;
+                    options.Password.RequireDigit = true;
+                    options.Password.RequireNonAlphanumeric = true;
+                    options.Password.RequireUppercase = true;
                     options.Password.RequireLowercase = false;
                     options.User.RequireUniqueEmail = true;
 

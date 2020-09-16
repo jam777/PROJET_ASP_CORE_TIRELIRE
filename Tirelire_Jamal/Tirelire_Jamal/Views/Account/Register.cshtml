@@ -4,7 +4,7 @@
 @functions {
     public string validChp(string chp, string value)
     {
-        return (Model != null && ViewBag.validChp[chp] == "Valid" ) ? value : "";
+        return (Model != null && ViewBag.validChp[chp] == "Valid") ? value : "";
     }
 }
 
@@ -39,7 +39,7 @@
                             {
                                 foreach (var error in item.Value.Errors)
                                 {
-                        <div class="text-danger">@error.ErrorMessage</div>
+                                    <div class="text-danger">@error.ErrorMessage</div>
                                 }
                             }
                         }
@@ -135,3 +135,11 @@
     </div> <!-- col.//-->
 
 </div> <!-- row.//-->
+@*}
+    else
+    {
+        @Html.Partial("_modalErreur")
+    }
+*@
+
+

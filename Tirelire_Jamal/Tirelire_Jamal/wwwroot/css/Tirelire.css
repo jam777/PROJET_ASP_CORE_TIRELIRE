@@ -64,20 +64,16 @@ body {
     position: relative !important;
 }
 
-.nav-item .userName {
-    color: red;
-}
-
-.nav-item a:after {
-    content: "";
-    border-top: 6px solid red;
-    width: 100%;
-    position: absolute;
-    bottom: -45%;
-    left: 0;
-    transform: scaleX(0);
-    transition: transform 0.25s ease-in-out 0s;
-}
+    .nav-item a:after {
+        content: "";
+        border-top: 6px solid red;
+        width: 100%;
+        position: absolute;
+        bottom: -45%;
+        left: 0;
+        transform: scaleX(0);
+        transition: transform 0.25s ease-in-out 0s;
+    }
 
 .fa-shopping-cart {
     font-size: 2rem !important;

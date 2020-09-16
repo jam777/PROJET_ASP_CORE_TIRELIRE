@@ -19,14 +19,8 @@ namespace Tirelire_Jamal.ViewModels
         [Required(ErrorMessage = "Veuillez entrer un Prénom")]
         public string Prenom { get; set; }
 
-
-        [Required(ErrorMessage = "Veuillez entrer un mot de passe")]
-        [RegularExpression(@"^[a-zA-Z0-9#$^+=!*()@%&]{8,}$",
-         ErrorMessage = "Le mot de passe doit contenir au moins 8 carateres alphanumériques ")]
-        public new string Password { get; set; }
-
         [EmailAddress]
-        [Required(ErrorMessage = "Veuillez entrer un email")]
+        [Required(ErrorMessage = "Veuillez entrer un Email")]
         public new string Email { get; set; }
 
         [Required(ErrorMessage = "Veuillez entrer une date de naissance")]

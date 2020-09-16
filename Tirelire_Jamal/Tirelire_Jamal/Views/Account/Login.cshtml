@@ -27,14 +27,14 @@
                 <form method="post">
                     @*EMAIL*@
                     <div class="form-group mb-0">
-                        <label class="font-weight-bold">Adresse Email</label>
+                        <label class="font-weight-bold">Adresse Email : bob@bob</label>
                         <input type="text" name="Email" class="form-control" placeholder="">
                     </div> <!-- form-group end.// -->
                     @Html.ValidationMessageFor(x => x.Email, "", new { @class = "text-danger" })
 
                     @*PASSWORD*@
                     <div class="form-group mb-0 mt-2">
-                        <label class="font-weight-bold mt-4">Password</label>
+                        <label class="font-weight-bold mt-4">Password : Bob777%L</label>
                         <input class="form-control" name="Password" type="password">
                     </div> <!-- form-group end.// -->
                     @Html.ValidationMessageFor(x => x.Password, "", new { @class = "text-danger" })
