@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Tirelire_Jamal.Models.Produit>
 
-<div class="bd-example ">
-    <div id="carouselExampleCaptions" class="carousel  slide1" data-ride="carousel">
+<div class="bd-example row m-md-auto mb-md-0 mb-3">
+    <div id="carouselExampleCaptions" class="d-inline-block m-auto carousel  slide1" data-ride="carousel">
         <ol class="carousel-indicators">
             @for (int i = 0; i < Model.Count(); i++)
             {
@@ -14,7 +14,7 @@
             @{ int cpt = 0;}
             @foreach (var prodColor in Model)
             {
-                <div class="carousel-item " id=carousse@(cpt ++)>
+                <div class="carousel-item" id=carousse@(cpt ++)>
                     <a href=@Url.Action("Detail","Home",new {id=prodColor.Id})>
                         <img src=@prodColor.Image class="d-block w-100" alt="...">
                     </a>

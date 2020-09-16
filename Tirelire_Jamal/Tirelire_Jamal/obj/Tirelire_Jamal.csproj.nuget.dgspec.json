@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\jamel\\Desktop\\Tirelire_Jam_ASP\\Tirelire_Jamal\\Tirelire_Jamal\\Tirelire_Jamal.csproj": {}
+    "C:\\Users\\jamel\\Desktop\\Tirelire_Jam_Pagination\\Tirelire_Jamal\\Tirelire_Jamal\\Tirelire_Jamal.csproj": {}
   },
   "projects": {
-    "C:\\Users\\jamel\\Desktop\\Tirelire_Jam_ASP\\Tirelire_Jamal\\Tirelire_Jamal\\Tirelire_Jamal.csproj": {
+    "C:\\Users\\jamel\\Desktop\\Tirelire_Jam_Pagination\\Tirelire_Jamal\\Tirelire_Jamal\\Tirelire_Jamal.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\jamel\\Desktop\\Tirelire_Jam_ASP\\Tirelire_Jamal\\Tirelire_Jamal\\Tirelire_Jamal.csproj",
+        "projectUniqueName": "C:\\Users\\jamel\\Desktop\\Tirelire_Jam_Pagination\\Tirelire_Jamal\\Tirelire_Jamal\\Tirelire_Jamal.csproj",
         "projectName": "Tirelire_Jamal",
-        "projectPath": "C:\\Users\\jamel\\Desktop\\Tirelire_Jam_ASP\\Tirelire_Jamal\\Tirelire_Jamal\\Tirelire_Jamal.csproj",
+        "projectPath": "C:\\Users\\jamel\\Desktop\\Tirelire_Jam_Pagination\\Tirelire_Jamal\\Tirelire_Jamal\\Tirelire_Jamal.csproj",
         "packagesPath": "C:\\Users\\jamel\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\jamel\\Desktop\\Tirelire_Jam_ASP\\Tirelire_Jamal\\Tirelire_Jamal\\obj\\",
+        "outputPath": "C:\\Users\\jamel\\Desktop\\Tirelire_Jam_Pagination\\Tirelire_Jamal\\Tirelire_Jamal\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\jamel\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -129,7 +129,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
         }
       }
     }

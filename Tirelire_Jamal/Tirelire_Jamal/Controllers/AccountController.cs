@@ -36,6 +36,11 @@ namespace Tirelire_Jamal.Controllers
             _roleManager = roleManager;
         }
 
+        /// <summary>
+        /// Formulaire de connection
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
         public IActionResult Login()
         {
 
@@ -43,7 +48,11 @@ namespace Tirelire_Jamal.Controllers
             return View();
         }
 
-        [AllowAnonymous]
+        /// <summary>
+        /// Authentification login
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
@@ -77,22 +86,31 @@ namespace Tirelire_Jamal.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Formulaire d'inscription
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult Register()
         {
+            ViewBag.modal = false;
             ViewBag.totalPanier = _session.totalPanier();
             return View();
         }
 
+        /// <summary>
+        /// Enregistrement
+        /// </summary>
+        /// <param name="registerModel"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel registerModel)
         {
             registerModel.RoleName = "Client";
 
+
             if (ModelState.IsValid)
             {
-
-
                 Adresse adresse = new Adresse()
                 {
                     AdFacturation = registerModel.AdresseFacturation,
@@ -100,11 +118,7 @@ namespace Tirelire_Jamal.Controllers
                 };
                 _repoAd.Create(adresse);
 
-
                 var IdAdresseRegister = _repoAd.FindAll().Where(p => p.AdFacturation == registerModel.AdresseFacturation).Select(p => p.Id).FirstOrDefault();
-
-
-
 
                 Client clientUser = new Client()
                 {
@@ -145,8 +159,10 @@ namespace Tirelire_Jamal.Controllers
                     var resultSignIn = await _signInManager.PasswordSignInAsync(registerModel.UserName, registerModel.Password, false, false);
                     if (resultSignIn.Succeeded)
                     {
+                        ViewBag.register = true;
                         return RedirectToAction("Index", "Home");
                     }
+
                 }
                 else
                 {
@@ -154,8 +170,9 @@ namespace Tirelire_Jamal.Controllers
 
                     foreach (var error in result.Errors)
                     {
-                        ModelState.AddModelError("", error.Description);
+                        ModelState.AddModelError("ErrorPassword", error.Description);
                     }
+
                 }
             }
 
@@ -165,7 +182,10 @@ namespace Tirelire_Jamal.Controllers
             return View(registerModel);
         }
 
-
+        /// <summary>
+        /// Déconnection 
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Logout()
         {
             if (User.Identity.IsAuthenticated)

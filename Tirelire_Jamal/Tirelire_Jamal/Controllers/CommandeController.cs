@@ -30,11 +30,17 @@ namespace Tirelire_Jamal.Controllers
             _repoAvis = repoAvis;
         }
 
+        /// <summary>
+        /// Ajouter une commande
+        /// </summary>
+        /// <param name="cmd"></param>
+        /// <returns></returns>
         [HttpPost]
         public IActionResult Ajouter(Commande cmd)
         {
             //Session
             var panierSession = _session.deserialise();
+
 
             //Commande
             cmd.Date = panierSession.Cmd.Date;
@@ -66,6 +72,10 @@ namespace Tirelire_Jamal.Controllers
             return RedirectToAction("Cmde", "Commande");
         }
 
+        /// <summary>
+        /// Afficher la vue Commande
+        /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> Cmde()
         {
             var user = await _userManager.GetUserAsync(User);
@@ -77,5 +87,9 @@ namespace Tirelire_Jamal.Controllers
 
             return View(user);
         }
+
     }
+
+
 }
+

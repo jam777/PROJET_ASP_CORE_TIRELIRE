@@ -1,14 +1,26 @@
-﻿body {
+﻿* {
     margin: 0;
-    background-color: #f3f3f3;
-    margin-top: 7rem;
-    padding-bottom: 8rem;
-    position: relative;
+    padding: 0;
 }
 
 html {
     font-size: 62.5%;
+    height: 100%;
 }
+
+body {
+    margin: 0;
+    background-color: #f3f3f3;
+    margin-top: 7rem;
+    height: 100%;
+}
+
+.main.container {
+    min-height: 100%;
+    margin: 0 auto;
+}
+
+
 
 @font-face {
     font-family: "fontTitre";
@@ -31,8 +43,13 @@ html {
 .navbar {
     position: fixed !important;
     width: 100%;
+    min-height: 7rem;
     top: 0;
     z-index: 1000 !important;
+}
+
+.navbar-collapse {
+    opacity: 1;
 }
 
 
@@ -47,16 +64,20 @@ html {
     position: relative !important;
 }
 
-    .nav-item a:after {
-        content: "";
-        border-top: 6px solid red;
-        width: 100%;
-        position: absolute;
-        bottom: -45%;
-        left: 0;
-        transform: scaleX(0);
-        transition: transform 0.25s ease-in-out 0s;
-    }
+.nav-item .userName {
+    color: red;
+}
+
+.nav-item a:after {
+    content: "";
+    border-top: 6px solid red;
+    width: 100%;
+    position: absolute;
+    bottom: -45%;
+    left: 0;
+    transform: scaleX(0);
+    transition: transform 0.25s ease-in-out 0s;
+}
 
 .fa-shopping-cart {
     font-size: 2rem !important;
@@ -105,6 +126,11 @@ html {
         transform: scale(1);
     }
 
+.navbar-collapse {
+    z-index: 3500 !important;
+    position: relative;
+}
+
 .container, main, row {
     z-index: 1 !important;
 }
@@ -115,12 +141,12 @@ html {
     font-style: italic;
 }
 
-.arial {
+.arial.detailPanier {
     position: fixed !important;
+    left: 0px;
     width: 100%;
-    top: 69px;
-    z-index: 1000 !important;
-    padding-right: 45px;
+    top: 7rem;
+    z-index: 500;
 }
 
 @media (max-width: 576px) {
@@ -153,7 +179,7 @@ html {
     font-size: 1.5rem;
     font-weight: bold;
 }
-/***************************Card Acceuil***********************/
+/***************************Card Accueil***********************/
 .produit .card-body {
     border-top: 1px solid #cecece;
 }
@@ -172,14 +198,15 @@ html {
     transition: all 0.2s;
 }
 
-.hoverImg a {
-    position: relative;
+a.hoverImg {
+    position: relative !important;
+    display: inline-block;
 }
 
 .hoverImgBack {
     position: absolute;
-    top: 0;
-    height: 100%;
+    top: 0px;
+    height: 100% !important;
     width: 100%;
     background-color: black;
     opacity: 0;
@@ -189,6 +216,7 @@ html {
 
     .hoverImgBack:hover {
         opacity: 0.2;
+        cursor: pointer !important;
     }
 
 .hoverDetail {
@@ -244,13 +272,13 @@ table {
 }
 
 td.prix {
-    font-size: 2rem;
+    font-size: 1.3rem;
     color: red;
     font-weight: bold;
 }
 
 td.poids, td.long, td.frais {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     color: grey;
     font-weight: bold;
 }
@@ -266,16 +294,18 @@ td.poids, td.long, td.frais {
 }
 /************************Detail Panier************************/
 .panierVide {
-    height: 40vh;
-    line-height: 40vh;
+    height: 90vh !important;
+}
+
+
+
+.modal-dialog {
+    max-width: 300px;
+    margin: auto;
 }
 
 .deletePanier {
     height: 30px;
-}
-
-.fas {
-    font-size: 30px;
 }
 
 .infoPanier {
@@ -331,7 +361,9 @@ hr {
     margin-bottom: 3rem;
 }
 
-
+#modalPanier {
+    z-index: 3000 !important;
+}
 
 
 @media (max-width: 320px) {
@@ -344,7 +376,6 @@ hr {
         width: 100vw;
     }
 }
-
 /*****************************Commande**************************/
 .commande th, .commande td {
     text-align: center;
@@ -372,6 +403,8 @@ hr {
 
 #texteSlide {
     display: none;
+    font-size: 1.1rem;
+    color: #808080;
 }
 
 .slide.up:after {
@@ -400,10 +433,8 @@ hr {
 
 /******************************Footer***************************/
 footer {
-    position: absolute;
-    bottom: 0px;
-    height: 7rem;
-    line-height: 7rem;
+    /*  position: absolute;*/
+    bottom: 0;
     width: 100%;
     background-color: black;
 }
@@ -412,6 +443,12 @@ footer {
         color: white;
         font-size: 1.5rem;
     }
+
+    footer img {
+        margin: 10px auto;
+    }
+
+
 
 /***************************Carrousel************************/
 
@@ -424,6 +461,15 @@ footer {
     vertical-align: middle;
     margin-bottom: 0px;
     font-weight: bold;
+}
+
+.carousel-inner:hover {
+    box-shadow: 0px 0px 5px #acacac;
+    transition: all 0.2s;
+}
+
+.bd-example {
+    height: 75% !important;
 }
 /************************Register**************************/
 .register label {
@@ -451,6 +497,16 @@ footer {
 
     .container {
         max-width: 300px;
+    }
+
+    footer .copy {
+        font-size: 1rem;
+    }
+
+    footer img {
+        height: 30px;
+        width: 30px;
+        margin: 10px auto;
     }
 }
 

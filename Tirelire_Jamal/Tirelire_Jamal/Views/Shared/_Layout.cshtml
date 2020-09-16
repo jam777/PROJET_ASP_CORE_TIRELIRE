@@ -22,7 +22,6 @@
             {
                 @Html.Partial("/Views/Shared/Menu/_MenuClient.cshtml");
             }
-
         }
         else
         {
@@ -31,25 +30,25 @@
 
     </header>
 
-    <div class="container">
-
-        <main role="main" class="pb-3">
+    <div class="main container p-0 ">
+        <div class="body ">
             @RenderBody()
-        </main>
+        </div>
     </div>
 
-    <footer class="border-top footer">
 
-        <div class="row ">
-            <div class="logo col-sm-2 col-3 text-right pl-0">
+    <footer class="border-top footer ">
+        <div class="row m-0 ">
+            <div class="logo col-sm-2 col-3  text-right pl-0 ">
                 <img src="/logo/Tirelire.png" alt="logo" />
             </div>
-            <div class="text-center copy col-8">
-                &copy; 2020 - Tirelire_Jamal
+            <div class="text-center  col-sm-8 col-6  d-flex m-auto ">
+                <div class="m-auto copy">&copy; 2020 - Tirelire_Jamal</div>
             </div>
-
+            <div class=" col-sm-2 col-3 "></div>
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/Tirelire.js" asp-append-version="true"></script>

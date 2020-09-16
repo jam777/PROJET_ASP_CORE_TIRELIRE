@@ -1,4 +1,4 @@
-﻿<nav class="navbar navbar-expand-sm  navbar-toggleable-sm navbar-light bg-light border-bottom box-shadow mb-3 ">
+﻿<nav class="navbar navbar-expand-sm  navbar-toggleable-sm navbar-light bg-light border-bottom  ">
 
 
     <a class="navbar-brand" href=@Url.Action("Index","Home")>
@@ -34,7 +34,7 @@
                 <a href="@Url.Action("DetailPanier","Panier")" class="pb-0 nav-link text-dark">
                     @*<i class="fas fa-shopping-cart"></i>*@
                     <img src="~/logo/panier.png" width="25" height="25" alt="Logo Panier" />
-                    @if (@ViewBag.totalPanier != 0)
+                    @if (@ViewBag.totalPanier != 0 && @ViewBag.totalPanier != null)
                     {
                         <div class="nbProduit">@ViewBag.totalPanier</div>
                     }

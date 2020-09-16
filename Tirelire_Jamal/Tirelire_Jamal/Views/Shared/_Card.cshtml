@@ -1,7 +1,7 @@
 ﻿@model Tirelire_Jamal.Models.Produit
 <div class="article col-sm-3 col-md-2 mx-0 p-2 text-center">
-    <div class="card hoverImg px-0">
-        <a href=@Url.Action("Detail", "Home",new { id=Model.Id })>
+    <div class="card  px-0">
+        <a class="hoverImg" href=@Url.Action("Detail", "Home",new { id=Model.Id })>
             <img src=@Model.Image class="imgCard w-100 d-block" alt="image produit">
             <div class="hoverImgBack"></div>
             <div class="hoverDetail">Voir détail</div>

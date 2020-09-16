@@ -1,16 +1,13 @@
 ﻿@model Tirelire_Jamal.Models.Produit
 <!-- Modal Panier-->
 <div class="modal fade" id="modalPanier" tabindex="-1" role="dialog" aria-labelledby="modalPanierTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+    <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
 
-            <div class="modal-header mx-0  px-0 py-1 row justify-content-around">
-
-                <a href="@Url.Action("Index","Home")" class="btn btn-secondary btn-lg">Pousuivre mes achats</a>
-                <a href="@Url.Action("DetailPanier","Panier")" class="btn btn-success btn-lg">Valider mon Panier</a>
-
+            <div class="modal-header mx-0  p-0">
+                <h4 class="modal-title text-center text-white w-100  py-2" style="background-color:#708090;">Votre Panier a été ajouté</h4>
             </div>
-            <h4 class="modal-title text-center text-white bg-success py-2">Votre Panier a été ajouté</h4>
+
 
             <div class="modal-body">
                 <div class="row mx-0">
@@ -40,7 +37,25 @@
                     </div>
                 </div>
             </div>
+
+            <div class="row justify-content-around">
+                <a href="@Url.Action("Index","Home")" class="btn btn-info btn-lg mb-3  ml-3">Pousuivre mes achats</a>
+                <a href="@Url.Action("DetailPanier","Panier")" class="btn btn-info btn-lg mb-3 mr-3">Valider mon Panier</a>
+            </div>
         </div>
     </div>
 </div>
 
+@*data-backdrop="false"*@
+
+
+
+<style>
+    .modal-backdrop {
+        z-index: 1 !important;
+    }
+
+    .modal-dialog {
+        z-index: 2500 !important;
+    }
+</style>

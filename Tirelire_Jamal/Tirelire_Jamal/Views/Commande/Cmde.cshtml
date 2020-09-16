@@ -5,9 +5,6 @@
     ViewData["Title"] = "Commande";
 
 }
-
-
-
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item active" aria-current="page">
@@ -21,7 +18,10 @@
 <br />
 <div class="titre_visiteur mx-2 d-flex justify-content-between mb-3">
     <div class="titre">
-        Liste des Commandes
+        Liste des Commandes de @if (User.Identity.IsAuthenticated)
+        {
+            <span>@Model.Nom</span>
+        }
     </div>
 </div>
 <br />
@@ -32,7 +32,7 @@
     {
         <div class="titre_visiteur mx-2 d-flex justify-content-between mb-3">
             <div class="titre">
-                Commande date : @cmde.Date
+                Date : @cmde.Date
             </div>
             <div class="titre">
                 Status : @cmde.Status
@@ -106,7 +106,10 @@
 }
 else
 {
-    <h1 class="panierVide text-black-50 text-center mt-5">Aucune Commande</h1>
+    <div class="panierVide row m-0  m-auto">
+        <h1 class=" text-black-50 text-center m-auto ">Aucune Commande</h1>
+    </div>
+
 }
 
 
