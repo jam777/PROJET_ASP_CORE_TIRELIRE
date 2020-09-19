@@ -11,7 +11,7 @@ $(document).ready(function () {
 
     $(".slide").click(function (e) {
         e.preventDefault();
-        $(this).next().slideToggle();
+        $(this).parent().next().slideToggle();
         $(this).toggleClass('up down');
     });//slide
 

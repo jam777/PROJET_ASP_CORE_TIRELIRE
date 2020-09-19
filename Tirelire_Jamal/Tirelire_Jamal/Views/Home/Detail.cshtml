@@ -74,9 +74,12 @@
                     <div class="descriptionDetail ">
                         <div class="titre_visiteur  mx-2 d-flex justify-content-between mb-3">
                             <div class="titre">
-                                <a class="slide down" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                                    <span>Description</span>
-                                </a>
+                                <div>
+                                    <a class="slide down" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                        <span>Description</span>
+                                    </a>
+                                </div>
+
                                 <div id="texteSlide">
                                     @Model.produit.Description
                                 </div>
@@ -92,17 +95,21 @@
                     @*FORMULAIRE AJOUT PANIER*@
                     <form id="formAjouter" action=@Url.Action("Ajouter", "Panier", new { id = Model.produit.Id }) method="post">
                         <div class="form-group">
-                            <select class="custom-select w-100 text-center" name="quantite">
-                                <option selected value="@valeur">@valeur</option>
-                                @for (int i = 1; i <= 10; i++)
-                                {
-                                    if (i == valeur)
+                            <div class="quantite d-flex">
+                                <span class="col-5">Quantite</span>
+                                <select class="custom-select" name="quantite">
+                                    <option selected value="@valeur">&emsp;&emsp;&nbsp;@valeur</option>
+                                    @for (int i = 1; i <= 10; i++)
                                     {
-                                        continue;
+                                        if (i == valeur)
+                                        {
+                                            continue;
+                                        }
+                                        <option value="@i" class="text-center">&emsp;&emsp;&nbsp;@i</option>
                                     }
-                                    <option value="@i" class="text-center">@i</option>
-                                }
-                            </select>
+                                </select>
+
+                            </div>
                             <button type="submit" id="ajouterPanier" class="btn btn-info btn-lg mt-2 form-control" name="panier">Ajouter au Panier</button>
                         </div>
                     </form>
@@ -113,18 +120,20 @@
         </div>
     </div>
     @* MODAL IMAGE*@
-    <div class="container carousseDetail  col-md-4">
-        <div class="titre_visiteur mx-2 d-flex justify-content-between mb-3">
-            <div class="titre">
-                Article(s) de même couleur
+
+    @if (Model.colorProduit.Count > 0)
+    {<div class="container carousseDetail  col-md-4">
+            <div class="titre_visiteur mx-2 d-flex justify-content-between mb-3">
+                <div class="titre">
+                    Article(s) de même couleur
+                </div>
             </div>
+            @Html.Partial("_carrousel", Model.colorProduit)
         </div>
-        @Html.Partial("_carrousel", Model.colorProduit)
-    </div>
+
+    }
+
 </div>
-
-
-
 
 @section scripts
 {
