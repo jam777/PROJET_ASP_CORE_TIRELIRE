@@ -1,4 +1,4 @@
-﻿@model Tirelire_Jamal.Models.Client
+@model Tirelire_Jamal.Models.Client
 @inject Tirelire_Jamal.Calculs.ICalcul calcul
 
 @{
@@ -30,79 +30,169 @@
 {
     foreach (var cmde in Model.Commande)
     {
-        <div class="titre_visiteur mx-2 d-flex justify-content-between mb-3">
-            <div class="titre">
-                Date : @cmde.Date
-            </div>
-            <div class="titre">
-                Status : @cmde.Status
-            </div>
-        </div>
+        @* HORIZONTAL COMMANDE*@
+        <div class="cmde-horizontal">
+            <div class="detailCommande bg-white pt-2 px-2 mb-5" style="border-radius:15px;">
+                <div class="titre_visiteur mx-2 d-flex justify-content-between mb-3">
+                    <div class="titre">
+                        Date : @cmde.Date
+                    </div>
+                    <div class="titre">
+                        Status : @cmde.Status
+                    </div>
+                </div>
 
-        <div class="commandeInfo px-5">
-            <table class="commande w-100 ">
-                <thead class="thead-light ">
-                    <tr>
-                        <th>Produit</th>
-                        <th>Image</th>
-                        <th>Prix</th>
-                        <th>Quantité</th>
-                        <th>HxLxl</th>
-                        <th>Poids</th>
-                        <th>Frais</th>
-                        <th>ssTotal</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @{ double Total = 0;}
-                    @foreach (var detail in cmde.DetailCommande)
-                    {
-                        <tr>
-                            @{Produit prod = new Produit();
-                            }
+                <div class="commandeInfo bg-white">
+                    <table class="commande w-100 ">
+                        <thead class="thead-light ">
+                            <tr>
+                                <th>Produit</th>
+                                <th>Image</th>
+                                <th>Prix</th>
+                                <th>Quantité</th>
+                                <th>HxLxl</th>
+                                <th>Poids</th>
+                                <th>Frais</th>
+                                <th>ssTotal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{ double Total = 0;}
+                            @foreach (var detail in cmde.DetailCommande)
+                            {
+                                <tr>
+                                    @{Produit prod = new Produit();
+                                    }
 
-                            @foreach (var item in (ViewBag.prods as List
+                                    @foreach (var item in (ViewBag.prods as List
 <Produit>
 ))
+                                    {
+                                        if (detail.Idproduit == item.Id)
+                                        {
+                                            prod = item;
+                                            break;
+                                        }
+                                    }
+                                    <td>@prod.Nom</td>
+                                    <td><img src="@prod.Image" height="30" width="30" alt="img_produit" /></td>
+                                    <td>@detail.Prix €</td>
+                                    <td>@detail.Quantite</td>
+                                    <td>@prod.Hauteur x @prod.Longueur x @prod.Largeur</td>
+                                    <td>@prod.Poids kg</td>
+                                    <td>@prod.Frais kg/€</td>
+                                    <td class="font-weight-bold">@calcul.ssTotal(detail) €</td>
+                                </tr>
+                                Total += calcul.ssTotal(detail);
+                            }@*Foreach detail*@
+                            <tr>
+                                <th>Total</th>
+                                <td colspan="6"></td>
+                                <td class="font-weight-bold text-danger">@Total €</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br />
+                    <div>
+                        <h4 class="slide down ml-2 mb-0">Commentaire</h4>
+                    </div>
+                    <div id="texteSlide">
+                        @{
+                            bool valide = (bool)cmde.Avis.Where(a => a.Idcommande == cmde.Id).FirstOrDefault().Valide;
+                            if (valide)
                             {
-                                if (detail.Idproduit == item.Id)
-                                {
-                                    prod = item;
-                                    break;
-                                }
+                                <span class="mx-3" style="font-size:1.3rem;font-weight:bold;">
+                                    @cmde.Commentaire
+                                </span>
                             }
-                            <td>@prod.Nom</td>
-                            <td><img src="@prod.Image" height="30" width="30" alt="img_produit" /></td>
-                            <td>@detail.Prix €</td>
-                            <td>@detail.Quantite</td>
-                            <td>@prod.Hauteur x @prod.Longueur x @prod.Largeur</td>
-                            <td>@prod.Poids kg</td>
-                            <td>@prod.Frais kg/€</td>
-                            <td class="font-weight-bold">@calcul.ssTotal(detail) €</td>
-                        </tr>
-                        Total += calcul.ssTotal(detail);
-                    }@*Foreach detail*@
-                    <tr>
-                        <th>Total</th>
-                        <td colspan="6"></td>
-                        <td class="font-weight-bold text-danger">@Total €</td>
-                    </tr>
-                </tbody>
-            </table>
-            <br />
-            <h5 class="slide down">Commentaire</h5>
-            <div id="texteSlide">
-                @{
-                    bool valide = (bool)cmde.Avis.Where(a => a.Idcommande == cmde.Id).FirstOrDefault().Valide;
-                    if (valide)
+                        }
+                    </div>
+                    <br />
+                </div>
+            </div>
+
+
+        </div>
+
+        @* VERTICAL COMMANDE*@
+        <div class="cmde-vertical">
+            <div class="detailCommande bg-white px-3 pt-1 pb-2 mb-5" style="border-radius:15px;">
+                <div class="titre_visiteur mx-2 d-flex justify-content-between mb-3">
+                    <div class="titre">
+                        Date : @cmde.Date
+                    </div>
+                    <div class="titre">
+                        Status : @cmde.Status
+                    </div>
+                </div>
+                @{ double Total2 = 0;}
+                @foreach (var detail in cmde.DetailCommande)
+                {
+                    Produit prod = new Produit();
+
+                    @foreach (var item in (ViewBag.prods as List<Produit>))
                     {
-                        @cmde.Commentaire
+                        if (detail.Idproduit == item.Id)
+                        {
+                            prod = item;
+                            break;
+                        }
                     }
-                }
+
+                    <div class="row m-0 titre justify-content-between">
+                        <h4 class="slide down ml-2">@prod.Nom</h4>
+                        <span style="font-size:1.5rem;" class="text-danger font-weight-bold">@calcul.ssTotal(detail) €</span>
+                    </div>
+                    <div id="texteSlide">
+                        <table class="mb-3 w-100">
+                            <tbody>
+                                <tr>
+                                    <th>Image</th>
+                                    <td><img src="@prod.Image" height="30" width="30" alt="img_produit" /></td>
+                                </tr>
+
+                                <tr>
+                                    <th>Prix</th>
+                                    <td>@detail.Prix €</td>
+                                </tr>
+
+                                <tr>
+                                    <th>Quantité</th>
+                                    <td>@detail.Quantite</td>
+                                </tr>
+
+                                <tr>
+                                    <th>HxLxl</th>
+                                    <td>@prod.Hauteur x @prod.Longueur x @prod.Largeur</td>
+                                </tr>
+
+                                <tr>
+                                    <th>Poids</th>
+                                    <td>@prod.Poids kg</td>
+                                </tr>
+
+                                <tr>
+                                    <th>Frais</th>
+                                    <td>@prod.Frais kg/€</td>
+                                </tr>
+
+                                <tr>
+                                    <th>ssTotal</th>
+                                    <td>@calcul.ssTotal(detail) €</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <hr />
+                    Total2 += calcul.ssTotal(detail);
+                }@*Foreach detailCommande*@
+                <div class="row m-0 titre justify-content-between">
+                    <h4 class=" ml-2">Total</h4>
+                    <span style="font-size:1.5rem;" class="text-danger font-weight-bold">@Total2 €</span>
+                </div>
             </div>
         </div>
-        <div class="hr"></div>
-    }//Foreach Commande
+    }@*Foreach Commande*@
 }
 else
 {

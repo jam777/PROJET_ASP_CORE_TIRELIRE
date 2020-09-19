@@ -1,4 +1,4 @@
-﻿* {
+* {
     margin: 0;
     padding: 0;
 }
@@ -64,20 +64,16 @@ body {
     position: relative !important;
 }
 
-.nav-item .userName {
-    color: red;
-}
-
-.nav-item a:after {
-    content: "";
-    border-top: 6px solid red;
-    width: 100%;
-    position: absolute;
-    bottom: -45%;
-    left: 0;
-    transform: scaleX(0);
-    transition: transform 0.25s ease-in-out 0s;
-}
+    .nav-item a:after {
+        content: "";
+        border-top: 6px solid red;
+        width: 100%;
+        position: absolute;
+        bottom: -45%;
+        left: 0;
+        transform: scaleX(0);
+        transition: transform 0.25s ease-in-out 0s;
+    }
 
 .fa-shopping-cart {
     font-size: 2rem !important;
@@ -257,15 +253,36 @@ select.custom-select {
     font-size: 1.5rem !important;
     color: red !important;
     font-weight: bold;
-    text-align-last: center !important;
+    width: 100px !important;
+    text-align-last: center;
 }
 
 select option {
-    text-align: center !important;
     font-weight: bold;
-    text-align-last: center !important;
-    padding-right: 50px !important;
 }
+
+select.custom-select.detailPanier {
+    font-size: 1.5rem !important;
+    color: red !important;
+    font-weight: bold;
+    width: 200px !important;
+    text-align-last: unset;
+}
+
+
+
+
+.quantite {
+    font-size: 1.5rem;
+    display: inline-block;
+    font-weight: bold;
+}
+
+    .quantite span {
+        padding-top: 2px;
+        margin-bottom: 10px;
+    }
+
 
 table {
     font-size: 1.3rem;
@@ -297,15 +314,13 @@ td.poids, td.long, td.frais {
     height: 90vh !important;
 }
 
-
-
 .modal-dialog {
     max-width: 300px;
     margin: auto;
 }
 
-.deletePanier {
-    height: 30px;
+a.deletePanier {
+    font-size: 1.5rem;
 }
 
 .infoPanier {
@@ -323,13 +338,15 @@ td.poids, td.long, td.frais {
     height: 100% !important;
 }
 
-    .infoPanier table td {
+    .infoPanier table td, .infoPanier table th {
         text-align: end !important;
+        vertical-align: inherit !important;
     }
 
 .infoPanier td input {
     text-align: center !important;
 }
+
 
 .totalPanier {
     font-weight: bold;
@@ -377,10 +394,40 @@ hr {
     }
 }
 /*****************************Commande**************************/
-.commande th, .commande td {
-    text-align: center;
+.cmde-horizontal {
 }
 
+.cmde-vertical {
+    display: none;
+}
+
+@media (max-width: 650px) {
+    .cmde-horizontal {
+        display: none;
+    }
+
+    .cmde-vertical {
+        display: block;
+    }
+
+        .cmde-vertical th {
+            padding-left: 5px !important;
+        }
+
+        .cmde-vertical td {
+            text-align: right;
+            font-weight: bold;
+        }
+
+        .cmde-vertical table {
+            border-spacing: 5px;
+            border-collapse: separate;
+        }
+
+    .commande th, .commande td {
+        text-align: center;
+    }
+}
 
 @media (max-width: 640px) {
     table.commande {

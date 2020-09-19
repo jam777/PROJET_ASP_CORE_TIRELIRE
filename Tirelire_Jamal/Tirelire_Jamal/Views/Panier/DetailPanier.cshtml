@@ -1,7 +1,7 @@
-﻿@model Tirelire_Jamal.ViewModels.PanierSessionViewModel
+@model Tirelire_Jamal.ViewModels.PanierSessionViewModel
 
 @{
-    ViewData["Title"] = "DetailPanier";
+    ViewData["Title"] = "Detail Panier";
 }
 
 @*FIL D'ARIALE'*@
@@ -57,25 +57,20 @@
 
             <div class=" row detailCommande  justify-content-around  col-12 mx-0 mb-5 mt-5">
 
-                @*DELETE*@
-                <div class=" deletePanier align-self-center  mb-3 mb-sm-0">
-                    <a href=@Url.Action("Supprimer", "Panier", new { id = detail.Idproduit })>
-                        @*<i class="fas fa-trash-alt"></i>*@
-                        <img src="/logo/delete.png" height="70" width="70" alt="delete Panier" />
-                    </a>
-                </div>
                 @*TITRE IMAGE*@
                 <div class=" titre-imgPanier  mb-3 mb-sm-0 ">
                     <h3 class="titrePanier  mb-2 mt-5 mt-sm-0">
                         @prod.Nom
                     </h3>
                     <div class="imgPanier  mb-3 mb-sm-0">
-                        <a class="hoverImg" href=@Url.Action("Detail", "Home", new { id = detail.Idproduit }) class="d-block">
+                        <a class="hoverImg d-block" href=@Url.Action("Detail", "Home", new { id = detail.Idproduit })>
                             <img src="@prod.Image" alt="imgProd" class="d-block" />
                             <div class="hoverImgBack"></div>
                             <div class="hoverDetail">Voir détail</div>
                         </a>
-
+                        <a href=@Url.Action("Supprimer", "Panier", new { id = detail.Idproduit }) class="d-block text-center deletePanier">
+                            Supprimer
+                        </a>
                     </div>
                 </div>
                 @*TABLE*@
@@ -93,16 +88,15 @@
                             <tr>
                                 <th scope="col">Quantité</th>
                                 <td>
-
-                                    <select class="custom-select w-100 text-center" name="quantite" data-url=@Url.Action("CalculPanier", "Panier", new { id = detail.Idproduit })>
-                                        <option selected value="@detail.Quantite">@detail.Quantite</option>
+                                    <select class="custom-select detailPanier" name="quantite" data-url=@Url.Action("CalculPanier", "Panier", new { id = detail.Idproduit })>
+                                        <option selected value="@detail.Quantite">&nbsp; &emsp;&emsp;&emsp;&emsp;&emsp;@detail.Quantite</option>
                                         @for (int i = 1; i <= 10; i++)
                                         {
                                             if (i == detail.Quantite)
                                             {
                                                 continue;
                                             }
-                                            <option value="@i" class="text-center">@i</option>
+                                            <option value="@i" class="text-center">&nbsp; &emsp;&emsp;&emsp;&emsp;&emsp;@i</option>
                                         }
                                     </select>
                                 </td>
